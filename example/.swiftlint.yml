@@ -1,0 +1,10 @@
+excluded:
+ - Carthage
+ - Pods
+ - StickyLayout/SceneDelegate.swift
+ - StickyLayout/AppDelegate.swift
+disabled_rules:
+  - todo
+line_length: 150
+file_length: 500
+function_body_length: 60

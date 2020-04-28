@@ -1,0 +1,14 @@
+## Build generated
+build/
+DerivedData/
+
+Pods
+*.xcworkspace/
+.idea/
+xcuserdata/
+*.xccheckout
+*.xcuserstate
+*.xcscmblueprint
+*.DS_Store
+StickyLayout/StickyLayout\.xcodeproj/xcuserdata/
+StickyLayout/StickyLayout\.xcworkspace/xcuserdata
