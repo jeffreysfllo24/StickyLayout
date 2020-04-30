@@ -5,6 +5,7 @@ excluded:
  - StickyLayout/AppDelegate.swift
 disabled_rules:
   - todo
+  - trailing_whitespace
 line_length: 150
 file_length: 500
 function_body_length: 60
