@@ -82,6 +82,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F843AB66245B3DB90006B011 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				F87E468B2458D35700F384CC /* Main.storyboard */,
+				F87E46902458D35900F384CC /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		F87E46792458D35700F384CC = {
 			isa = PBXGroup;
 			children = (
@@ -105,13 +114,12 @@
 		F87E46842458D35700F384CC /* StickyLayout */ = {
 			isa = PBXGroup;
 			children = (
+				F843AB66245B3DB90006B011 /* Storyboards */,
 				F87E46852458D35700F384CC /* AppDelegate.swift */,
 				F87E46872458D35700F384CC /* SceneDelegate.swift */,
 				F87E46892458D35700F384CC /* ViewController.swift */,
 				F8F80A03245A125B000B6E61 /* StickyLayout.swift */,
-				F87E468B2458D35700F384CC /* Main.storyboard */,
 				F87E468E2458D35900F384CC /* Assets.xcassets */,
-				F87E46902458D35900F384CC /* LaunchScreen.storyboard */,
 				F87E46932458D35900F384CC /* Info.plist */,
 			);
 			path = StickyLayout;

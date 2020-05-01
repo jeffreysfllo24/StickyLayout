@@ -10,24 +10,97 @@ import Foundation
 import UIKit
 
 open class StickyLayout: UICollectionViewFlowLayout {
+    
+    private let stickyConfig: StickyLayoutConfig
+    private var cellAttrsDict = [IndexPath: UICollectionViewLayoutAttributes]()
 
-    override open func prepare() {
-        // TODO
+    private var rows: Int {
+        return collectionView?.numberOfSections ?? 0
     }
 
-    override open func invalidateLayout() {
-        // TODO
+    private func colsCount(section: Int) -> Int {
+        return collectionView?.numberOfItems(inSection: section) ?? 0
+    }
+    
+    public init(stickyConfig: StickyLayoutConfig) {
+        self.stickyConfig = stickyConfig
+        super.init()
+    }
+
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override open func prepare() {
+        super.prepare()
+        layoutCellPositions()
+        updateStickyCellPositions()
+    }
+    
+    private func layoutCellPositions() {
+        
+        guard let collectionView = collectionView, rows > 0 else {
+            return
+        }
+
+        cellAttrsDict = [IndexPath: UICollectionViewLayoutAttributes]()
+        
+        
+    }
+    
+    private func stickyCellsTotalHeight(col: Int) -> CGFloat {
+        var stickyRowsHeight: CGFloat = 0
+        let bottomStickyRowsSet = stickyConfig.getBottomStickyRows(rowCount: rows)
+        for section in bottomStickyRowsSet {
+            guard let itemsCount = collectionView?.numberOfItems(inSection: section), itemsCount > 0 else { continue }
+            let cellSize = getCellSize(forRow: section, forCol: col)
+            
+            // TODO: May need to remove spacing for last row
+            // Efficiency by assuming all rows have the same height?
+            let cellSpacing = getCellSpacing(forRow: section)
+            stickyRowsHeight += cellSize.height + cellSpacing
+        }
+        return stickyRowsHeight
+    }
+    
+    private func updateStickyCellPositions() {
+        
+    }
+
+    override public func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
     }
 
     override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        // TODO
-        return nil
-
+        var collectionViewAttributes: [UICollectionViewLayoutAttributes] = []
+        for (_, attribute) in cellAttrsDict {
+            if rect.intersects(attribute.frame) {
+                collectionViewAttributes.append(attribute)
+            }
+        }
+        return collectionViewAttributes
     }
 
     override open func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        // TODO
-        return nil
+        return cellAttrsDict[indexPath]
+    }
+    
+    private func getCellSize(forRow row: Int, forCol col: Int) -> CGSize {
+        guard let collectionView = collectionView,
+            let delegate = collectionView.delegate as? UICollectionViewDelegateFlowLayout,
+            let size = delegate.collectionView?(collectionView, layout: self, sizeForItemAt: IndexPath(item: col, section: row)) else {
+                return self.itemSize
+        }
+        return size
+    }
+    
+    private func getCellSpacing(forRow row: Int) -> CGFloat {
+        guard let collectionView = collectionView,
+            let delegate = collectionView.delegate as? UICollectionViewDelegateFlowLayout,
+            let spacing = delegate.collectionView?(collectionView, layout: self, minimumLineSpacingForSectionAt: row) else {
+                return self.minimumLineSpacing
+        }
+        return spacing
     }
 
 }
@@ -82,5 +155,25 @@ extension StickyLayout {
             let startIndex = max(startIndex, 0)
             return stickySetCount > 0 ? Set<Int>(startIndex...startIndex + stickySetCount - 1) : Set()
         }
+    }
+}
+
+// MARK: - ZOrdering
+extension StickyLayout {
+
+    private func zOrder(forRow row: Int, forCol col: Int, stickyRowSet: Set<Int>, stickColSet: Set<Int>) -> Int {
+        if stickyRowSet.contains(row) && stickColSet.contains(col) {
+            return ZOrder.staticCell
+        } else if stickyRowSet.contains(row) || stickColSet.contains(col) {
+            return ZOrder.stickyCell
+        } else {
+            return ZOrder.basicCell
+        }
+    }
+
+    private enum ZOrder {
+        static let basicCell = 0
+        static let stickyCell = 1
+        static let staticCell = 2
     }
 }
