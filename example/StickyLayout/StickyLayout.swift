@@ -45,7 +45,6 @@ open class StickyLayout: UICollectionViewFlowLayout {
 
         cellAttrsDict = [IndexPath: UICollectionViewLayoutAttributes]()
         
-        
     }
     
     private func stickyCellsTotalHeight(col: Int) -> CGFloat {
@@ -64,7 +63,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
     }
     
     private func updateStickyCellPositions() {
-        
+         
     }
 
     override public func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
