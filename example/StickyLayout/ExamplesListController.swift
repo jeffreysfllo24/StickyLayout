@@ -8,15 +8,26 @@
 
 import UIKit
 
-class ExampleViewController: UITableViewController {
+public enum StickyLayoutTypes {
+    case calendar
+    case tabular
+    case horizontal
     
-    private enum ExampleCollectionViews {
-        case header
-        case tabular
-        case tabularBottom
+    func title() -> String {
+        switch self {
+        case .calendar:
+            return "Calendar"
+        case .tabular:
+            return "Tabular"
+        case .horizontal:
+            return "Horizontal"
+        }
     }
-    
-    private let examples: [ExampleCollectionViews] = [.header, .tabular, .tabularBottom]
+}
+
+class ExamplesListController: UITableViewController {
+
+    private let examples: [StickyLayoutTypes] = [.calendar, .tabular, .horizontal]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,10 +39,6 @@ class ExampleViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = true
-        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,18 +46,17 @@ class ExampleViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 40
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        // TODO: Set title
-        cell.textLabel?.text = ""
+        cell.textLabel?.text = examples[indexPath.row].title()
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO
+        navigationController?.pushViewController(ExampleStickyController(stickLayoutType: examples[indexPath.row]), animated: true)
     }
 }

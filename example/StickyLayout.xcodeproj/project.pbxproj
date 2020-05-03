@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F33DF3F610543A1CE3764EB8 /* Pods_StickyLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD09FC2AE2CAFAC75F265C9 /* Pods_StickyLayout.framework */; };
+		F82672B1245E5B630063D767 /* ExampleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82672B0245E5B630063D767 /* ExampleController.swift */; };
 		F87E46862458D35700F384CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87E46852458D35700F384CC /* AppDelegate.swift */; };
 		F87E46882458D35700F384CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87E46872458D35700F384CC /* SceneDelegate.swift */; };
-		F87E468A2458D35700F384CC /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87E46892458D35700F384CC /* ExampleViewController.swift */; };
+		F87E468A2458D35700F384CC /* ExamplesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87E46892458D35700F384CC /* ExamplesListController.swift */; };
 		F87E468F2458D35900F384CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87E468E2458D35900F384CC /* Assets.xcassets */; };
 		F87E46922458D35900F384CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87E46902458D35900F384CC /* LaunchScreen.storyboard */; };
 		F8F80A04245A125B000B6E61 /* StickyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F80A03245A125B000B6E61 /* StickyLayout.swift */; };
@@ -31,10 +32,11 @@
 		1BD09FC2AE2CAFAC75F265C9 /* Pods_StickyLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StickyLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4286BF7F23805260D5122845 /* Pods-StickyLayout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickyLayout.debug.xcconfig"; path = "Target Support Files/Pods-StickyLayout/Pods-StickyLayout.debug.xcconfig"; sourceTree = "<group>"; };
 		88551C9E7531243CB504C60D /* Pods-StickyLayout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickyLayout.release.xcconfig"; path = "Target Support Files/Pods-StickyLayout/Pods-StickyLayout.release.xcconfig"; sourceTree = "<group>"; };
+		F82672B0245E5B630063D767 /* ExampleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleController.swift; sourceTree = "<group>"; };
 		F87E46822458D35700F384CC /* StickyLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickyLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87E46852458D35700F384CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F87E46872458D35700F384CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F87E46892458D35700F384CC /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
+		F87E46892458D35700F384CC /* ExamplesListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesListController.swift; sourceTree = "<group>"; };
 		F87E468E2458D35900F384CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F87E46912458D35900F384CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F87E46932458D35900F384CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -114,7 +116,8 @@
 				F843AB66245B3DB90006B011 /* Storyboards */,
 				F87E46852458D35700F384CC /* AppDelegate.swift */,
 				F87E46872458D35700F384CC /* SceneDelegate.swift */,
-				F87E46892458D35700F384CC /* ExampleViewController.swift */,
+				F87E46892458D35700F384CC /* ExamplesListController.swift */,
+				F82672B0245E5B630063D767 /* ExampleController.swift */,
 				F8F80A03245A125B000B6E61 /* StickyLayout.swift */,
 				F87E468E2458D35900F384CC /* Assets.xcassets */,
 				F87E46932458D35900F384CC /* Info.plist */,
@@ -275,9 +278,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F87E468A2458D35700F384CC /* ExampleViewController.swift in Sources */,
+				F87E468A2458D35700F384CC /* ExamplesListController.swift in Sources */,
 				F87E46862458D35700F384CC /* AppDelegate.swift in Sources */,
 				F8F80A04245A125B000B6E61 /* StickyLayout.swift in Sources */,
+				F82672B1245E5B630063D767 /* ExampleController.swift in Sources */,
 				F87E46882458D35700F384CC /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

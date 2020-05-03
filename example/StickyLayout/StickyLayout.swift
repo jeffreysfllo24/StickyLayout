@@ -45,25 +45,128 @@ open class StickyLayout: UICollectionViewFlowLayout {
 
         cellAttrsDict = [IndexPath: UICollectionViewLayoutAttributes]()
         
+        // Set Containing current xPos and current yPos for each column
+        var xPos: CGFloat = 0
+        var yPosSet: [Int: CGFloat] = [:]
+        
+        let bottomStickyRowsSets = stickyConfig.getBottomStickyRows(rowCount: rows)
+        
+        // Retrieve height of right sticky columns and bottom sticky rows
+        var stickyColHeights = stickyCellsColHeights()
+        var stickyRowWidths = stickyCellsRowWidths()
+        
+        for section in 0..<rows {
+            let itemsCount = collectionView.numberOfItems(inSection: section)
+            let rightStickyColsSets = stickyConfig.getRightStickyCols(colCount: itemsCount)
+            let cellSpacing = getCellSpacing(forRow: section)
+
+            for item in 0..<itemsCount {
+                let cellSize = getCellSize(forRow: section, forCol: item)
+                let cellWidth = cellSize.width
+                let cellHeight = cellSize.height
+                let cellIndex = IndexPath(item: item, section: section)
+                let cellAttributes = UICollectionViewLayoutAttributes(forCellWith: cellIndex as IndexPath)
+                let cellSpacing: CGFloat = (section == rows - 1) ? 0 : cellSpacing
+
+                let yPos: CGFloat = yPosSet[item] ?? 0
+                var stickyRowYPos = yPos
+                if bottomStickyRowsSets.contains(section) {
+                    stickyRowYPos = collectionView.frame.height - (stickyColHeights[item] ?? 0)
+                    
+                    // Check if the current Y position is smaller than where the stickyRow would be when aligned to
+                    // the bottom. If true, the tableview height is smaller than the container and we update the
+                    // stickyRow Y position with the current Y position.
+                    if yPos < stickyRowYPos {
+                        stickyRowYPos = yPos
+                    }
+                    stickyColHeights[item] = stickyColHeights[item] ?? 0 - cellHeight - cellSpacing
+                }
+                
+                var stickyRowXPos = xPos
+                if rightStickyColsSets.contains(item) {
+                    stickyRowXPos = collectionView.frame.width - (stickyRowWidths[section] ?? 0)
+                    
+                    // Check if the current X position is smaller than where the stickyCol would be when aligned to
+                    // the right. If true, the tableview width is smaller than the container and we update the stickyRow
+                    // X position with the current X position.
+                    if xPos < stickyRowXPos {
+                        stickyRowXPos = xPos
+                    }
+                    stickyRowWidths[section] = stickyRowWidths[section] ?? 0 - cellWidth - cellSpacing
+                }
+                
+                cellAttributes.frame = CGRect(x: stickyRowXPos, y: stickyRowYPos, width: cellWidth, height: cellHeight)
+                cellAttrsDict[cellIndex] = cellAttributes
+                xPos += cellWidth + cellSpacing
+                yPosSet[item] = yPosSet[item] ?? 0 + cellHeight + cellSpacing
+            }
+            xPos = 0
+        }
     }
     
-    private func stickyCellsTotalHeight(col: Int) -> CGFloat {
-        var stickyRowsHeight: CGFloat = 0
+    private func stickyCellsColHeights() -> [Int: CGFloat] {
+        var stickyColHeights: [Int: CGFloat] = [:]
+        
         let bottomStickyRowsSet = stickyConfig.getBottomStickyRows(rowCount: rows)
         for section in bottomStickyRowsSet {
             guard let itemsCount = collectionView?.numberOfItems(inSection: section), itemsCount > 0 else { continue }
-            let cellSize = getCellSize(forRow: section, forCol: col)
-            
-            // TODO: May need to remove spacing for last row
-            // Efficiency by assuming all rows have the same height?
             let cellSpacing = getCellSpacing(forRow: section)
-            stickyRowsHeight += cellSize.height + cellSpacing
+
+            for col in 0..<itemsCount {
+                let cellSize = getCellSize(forRow: section, forCol: col)
+                
+                // TODO: May need to remove spacing for last row
+                // Efficiency by assuming all rows have the same height?
+                let stickyCellSpacing = (section == rows - 1) ? 0 : cellSpacing
+                stickyColHeights[col] = stickyColHeights[col] ?? 0 + cellSize.height + stickyCellSpacing
+            }
         }
-        return stickyRowsHeight
+        return stickyColHeights
+    }
+    
+    private func stickyCellsRowWidths() -> [Int: CGFloat] {
+        var stickyRowWidths: [Int: CGFloat] = [:]
+        
+        for section in 0..<rows {
+            guard let itemsCount = collectionView?.numberOfItems(inSection: section), itemsCount > 0 else { continue }
+            let stickyCols = stickyConfig.getRightStickyCols(colCount: itemsCount)
+            let cellSpacing = getCellSpacing(forRow: section)
+
+            for col in stickyCols {
+                let cellSize = getCellSize(forRow: section, forCol: col)
+                let stickyCellSpacing = (col == itemsCount - 1) ? 0 : cellSpacing
+                stickyRowWidths[section] = stickyRowWidths[section] ?? 0 + cellSize.width + stickyCellSpacing
+            }
+        }
+        return stickyRowWidths
     }
     
     private func updateStickyCellPositions() {
+         guard let collectionView = collectionView else {
+             return
+         }
          
+         let stickyRowSet = stickyConfig.getStickyRows(rowCount: rows)
+         for row in 0..<rows {
+             let itemCount = collectionView.numberOfItems(inSection: row)
+             let stickyColSet = stickyConfig.getStickyCols(colCount: itemCount)
+
+             for col in 0..<itemCount {
+
+                 let cellIndex = IndexPath(item: col, section: row)
+                 let attribute = cellAttrsDict[cellIndex]
+                 
+                 if stickyRowSet.contains(row) {
+                     attribute?.frame.origin.y += collectionView.contentOffset.y
+                 }
+                 
+                if stickyColSet.contains(col) {
+                     attribute?.frame.origin.x += collectionView.contentOffset.x
+                 }
+                 
+                attribute?.zIndex = zOrder(forRow: row, forCol: col, stickyRowSet: stickyRowSet, stickyColSet: stickyColSet)
+             }
+         }
     }
 
     override public func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
@@ -160,10 +263,10 @@ extension StickyLayout {
 // MARK: - ZOrdering
 extension StickyLayout {
 
-    private func zOrder(forRow row: Int, forCol col: Int, stickyRowSet: Set<Int>, stickColSet: Set<Int>) -> Int {
-        if stickyRowSet.contains(row) && stickColSet.contains(col) {
+    private func zOrder(forRow row: Int, forCol col: Int, stickyRowSet: Set<Int>, stickyColSet: Set<Int>) -> Int {
+        if stickyRowSet.contains(row) && stickyColSet.contains(col) {
             return ZOrder.staticCell
-        } else if stickyRowSet.contains(row) || stickColSet.contains(col) {
+        } else if stickyRowSet.contains(row) || stickyColSet.contains(col) {
             return ZOrder.stickyCell
         } else {
             return ZOrder.basicCell
