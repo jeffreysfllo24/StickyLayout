@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F33DF3F610543A1CE3764EB8 /* Pods_StickyLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BD09FC2AE2CAFAC75F265C9 /* Pods_StickyLayout.framework */; };
+		F823BFA42461015A00874539 /* CalendarCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F823BFA32461015A00874539 /* CalendarCells.swift */; };
 		F82672B1245E5B630063D767 /* ExampleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82672B0245E5B630063D767 /* ExampleController.swift */; };
 		F87E46862458D35700F384CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87E46852458D35700F384CC /* AppDelegate.swift */; };
 		F87E46882458D35700F384CC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87E46872458D35700F384CC /* SceneDelegate.swift */; };
@@ -32,6 +33,7 @@
 		1BD09FC2AE2CAFAC75F265C9 /* Pods_StickyLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StickyLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4286BF7F23805260D5122845 /* Pods-StickyLayout.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickyLayout.debug.xcconfig"; path = "Target Support Files/Pods-StickyLayout/Pods-StickyLayout.debug.xcconfig"; sourceTree = "<group>"; };
 		88551C9E7531243CB504C60D /* Pods-StickyLayout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickyLayout.release.xcconfig"; path = "Target Support Files/Pods-StickyLayout/Pods-StickyLayout.release.xcconfig"; sourceTree = "<group>"; };
+		F823BFA32461015A00874539 /* CalendarCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCells.swift; sourceTree = "<group>"; };
 		F82672B0245E5B630063D767 /* ExampleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleController.swift; sourceTree = "<group>"; };
 		F87E46822458D35700F384CC /* StickyLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickyLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87E46852458D35700F384CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				F87E46872458D35700F384CC /* SceneDelegate.swift */,
 				F87E46892458D35700F384CC /* ExamplesListController.swift */,
 				F82672B0245E5B630063D767 /* ExampleController.swift */,
+				F823BFA32461015A00874539 /* CalendarCells.swift */,
 				F8F80A03245A125B000B6E61 /* StickyLayout.swift */,
 				F87E468E2458D35900F384CC /* Assets.xcassets */,
 				F87E46932458D35900F384CC /* Info.plist */,
@@ -283,6 +286,7 @@
 				F8F80A04245A125B000B6E61 /* StickyLayout.swift in Sources */,
 				F82672B1245E5B630063D767 /* ExampleController.swift in Sources */,
 				F87E46882458D35700F384CC /* SceneDelegate.swift in Sources */,
+				F823BFA42461015A00874539 /* CalendarCells.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +370,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -420,7 +424,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -438,6 +442,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R6BGCQQ764;
 				INFOPLIST_FILE = StickyLayout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -457,6 +462,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R6BGCQQ764;
 				INFOPLIST_FILE = StickyLayout/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -13,6 +13,13 @@ open class StickyLayout: UICollectionViewFlowLayout {
     
     private let stickyConfig: StickyLayoutConfig
     private var cellAttrsDict = [IndexPath: UICollectionViewLayoutAttributes]()
+    private var cellFramesDict = [IndexPath: CGRect]()
+    private var collectionViewContentWidth: CGFloat = 0
+    private var collectionViewContentHeight: CGFloat = 0
+    
+    override public var collectionViewContentSize: CGSize {
+        return CGSize(width: collectionViewContentWidth, height: collectionViewContentHeight)
+    }
 
     private var rows: Int {
         return collectionView?.numberOfSections ?? 0
@@ -22,9 +29,10 @@ open class StickyLayout: UICollectionViewFlowLayout {
         return collectionView?.numberOfItems(inSection: section) ?? 0
     }
     
-    public init(stickyConfig: StickyLayoutConfig) {
+    public init(stickyConfig: StickyLayoutConfig = StickyLayoutConfig()) {
         self.stickyConfig = stickyConfig
         super.init()
+        self.scrollDirection = .horizontal
     }
 
     public required init?(coder: NSCoder) {
@@ -39,7 +47,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
     
     private func layoutCellPositions() {
         
-        guard let collectionView = collectionView, rows > 0 else {
+        guard let collectionView = collectionView, rows > 0, cellAttrsDict.isEmpty else {
             return
         }
 
@@ -66,7 +74,6 @@ open class StickyLayout: UICollectionViewFlowLayout {
                 let cellHeight = cellSize.height
                 let cellIndex = IndexPath(item: item, section: section)
                 let cellAttributes = UICollectionViewLayoutAttributes(forCellWith: cellIndex as IndexPath)
-                let cellSpacing: CGFloat = (section == rows - 1) ? 0 : cellSpacing
 
                 let yPos: CGFloat = yPosSet[item] ?? 0
                 var stickyRowYPos = yPos
@@ -79,7 +86,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
                     if yPos < stickyRowYPos {
                         stickyRowYPos = yPos
                     }
-                    stickyColHeights[item] = stickyColHeights[item] ?? 0 - cellHeight - cellSpacing
+                    stickyColHeights[item] = (stickyColHeights[item] ?? 0) - cellHeight - cellSpacing
                 }
                 
                 var stickyRowXPos = xPos
@@ -92,16 +99,19 @@ open class StickyLayout: UICollectionViewFlowLayout {
                     if xPos < stickyRowXPos {
                         stickyRowXPos = xPos
                     }
-                    stickyRowWidths[section] = stickyRowWidths[section] ?? 0 - cellWidth - cellSpacing
+                    stickyRowWidths[section] = (stickyRowWidths[section] ?? 0) - cellWidth - cellSpacing
                 }
                 
-                cellAttributes.frame = CGRect(x: stickyRowXPos, y: stickyRowYPos, width: cellWidth, height: cellHeight)
+                cellFramesDict[cellIndex] = CGRect(x: stickyRowXPos, y: stickyRowYPos, width: cellWidth, height: cellHeight)
+                cellAttributes.frame = cellFramesDict[cellIndex] ?? .zero
                 cellAttrsDict[cellIndex] = cellAttributes
                 xPos += cellWidth + cellSpacing
-                yPosSet[item] = yPosSet[item] ?? 0 + cellHeight + cellSpacing
+                yPosSet[item] = (yPosSet[item] ?? 0) + cellHeight + cellSpacing
             }
+            collectionViewContentWidth = max(collectionViewContentWidth, xPos)
             xPos = 0
         }
+        collectionViewContentHeight = yPosSet.values.max() ?? 0
     }
     
     private func stickyCellsColHeights() -> [Int: CGFloat] {
@@ -117,8 +127,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
                 
                 // TODO: May need to remove spacing for last row
                 // Efficiency by assuming all rows have the same height?
-                let stickyCellSpacing = (section == rows - 1) ? 0 : cellSpacing
-                stickyColHeights[col] = stickyColHeights[col] ?? 0 + cellSize.height + stickyCellSpacing
+                stickyColHeights[col] = (stickyColHeights[col] ?? 0) + cellSize.height + cellSpacing
             }
         }
         return stickyColHeights
@@ -134,8 +143,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
 
             for col in stickyCols {
                 let cellSize = getCellSize(forRow: section, forCol: col)
-                let stickyCellSpacing = (col == itemsCount - 1) ? 0 : cellSpacing
-                stickyRowWidths[section] = stickyRowWidths[section] ?? 0 + cellSize.width + stickyCellSpacing
+                stickyRowWidths[section] = (stickyRowWidths[section] ?? 0) + cellSize.width + cellSpacing
             }
         }
         return stickyRowWidths
@@ -157,11 +165,11 @@ open class StickyLayout: UICollectionViewFlowLayout {
                  let attribute = cellAttrsDict[cellIndex]
                  
                  if stickyRowSet.contains(row) {
-                     attribute?.frame.origin.y += collectionView.contentOffset.y
+                    attribute?.frame.origin.y = (cellFramesDict[cellIndex]?.origin.y ?? 0) + collectionView.contentOffset.y
                  }
                  
                 if stickyColSet.contains(col) {
-                     attribute?.frame.origin.x += collectionView.contentOffset.x
+                     attribute?.frame.origin.x = (cellFramesDict[cellIndex]?.origin.x ?? 0) + collectionView.contentOffset.x
                  }
                  
                 attribute?.zIndex = zOrder(forRow: row, forCol: col, stickyRowSet: stickyRowSet, stickyColSet: stickyColSet)
@@ -174,6 +182,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
     }
 
     override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        // Need to find a way to add sticky cell attributes anyway. Maybe separate into two separate cell dictionaries?
         var collectionViewAttributes: [UICollectionViewLayoutAttributes] = []
         for (_, attribute) in cellAttrsDict {
             if rect.intersects(attribute.frame) {
