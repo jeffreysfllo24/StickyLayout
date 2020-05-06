@@ -13,12 +13,8 @@ class ExampleStickyController: UIViewController {
     
     let stickyLayoutType: StickyLayoutTypes
     let numberOfItems = 5
-    lazy var stickyLayout = StickyLayout(stickyConfig: StickyLayoutConfig(stickyRowsFromTop: 1,
-                                                                          stickyRowsFromBottom: 0,
-                                                                          stickyColsFromLeft: 1,
-                                                                          stickyColsFromRight: 0))
     let stickyCollectionViewModel: StickyCollectionViewModel
-    
+
     init(stickLayoutType: StickyLayoutTypes) {
         stickyLayoutType = stickLayoutType
         switch stickyLayoutType {
@@ -48,6 +44,7 @@ class ExampleStickyController: UIViewController {
     }
         
     private func createCollectionView() -> UICollectionView {
+        let stickyLayout = StickyLayout(stickyConfig: stickyCollectionViewModel.stickyConfig)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: stickyLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self

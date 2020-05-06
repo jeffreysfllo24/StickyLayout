@@ -106,12 +106,12 @@ open class StickyLayout: UICollectionViewFlowLayout {
         
         // Set Containing current xPos and current yPos for each column
         var xPos: CGFloat = 0
-        var yPosSet: [Int: CGFloat] = [:]
+        var yPos: CGFloat = 0
         
         let bottomStickyRowsSets = stickyConfig.getBottomStickyRows(rowCount: rows)
         
         // Retrieve height of right sticky columns and bottom sticky rows
-        var stickyColHeights = stickyCellsColHeights()
+        var stickyColHeights = stickCellHeights()
         var stickyRowWidths = stickyCellsRowWidths()
         
         for section in 0..<rows {
@@ -119,19 +119,20 @@ open class StickyLayout: UICollectionViewFlowLayout {
             let rightStickyColsSets = stickyConfig.getRightStickyCols(colCount: itemsCount)
             let sectionSpacing = (section == rows - 1) ? 0 : getSectionSpacing(forRow: section)
             let interItemSpacing = getInterItemSpacing(forRow: section)
+            var maxCellHeightForSection: CGFloat = 0
 
             for item in 0..<itemsCount {
                 let cellSize = getCellSize(forRow: section, forCol: item)
                 let cellWidth = cellSize.width
                 let cellHeight = cellSize.height
+                maxCellHeightForSection = max(maxCellHeightForSection, cellHeight)
                 let cellIndex = IndexPath(item: item, section: section)
                 let cellAttributes = UICollectionViewLayoutAttributes(forCellWith: cellIndex as IndexPath)
                 let interItemSpacing = (item == itemsCount - 1) ? 0 : interItemSpacing
                 
-                let yPos: CGFloat = yPosSet[item] ?? 0
                 var stickyRowYPos = yPos
                 if bottomStickyRowsSets.contains(section) {
-                    stickyRowYPos = collectionView.frame.height - (stickyColHeights[item] ?? 0)
+                    stickyRowYPos = collectionView.frame.height - stickyColHeights
                     
                     // Check if the current Y position is smaller than where the stickyRow would be when aligned to
                     // the bottom. If true, the tableview height is smaller than the container and we update the
@@ -139,7 +140,6 @@ open class StickyLayout: UICollectionViewFlowLayout {
                     if yPos < stickyRowYPos {
                         stickyRowYPos = yPos
                     }
-                    stickyColHeights[item] = (stickyColHeights[item] ?? 0) - cellHeight - sectionSpacing
                 }
                 
                 var stickyRowXPos = xPos
@@ -159,14 +159,35 @@ open class StickyLayout: UICollectionViewFlowLayout {
                 cellAttributes.frame = cellFramesDict[cellIndex] ?? .zero
                 cellAttrsDict[cellIndex] = cellAttributes
                 xPos += cellWidth + interItemSpacing
-                yPosSet[item] = (yPosSet[item] ?? 0) + cellHeight + sectionSpacing
             }
+            
+            if bottomStickyRowsSets.contains(section) {
+                stickyColHeights -= (maxCellHeightForSection + sectionSpacing)
+            }
+            yPos += maxCellHeightForSection + sectionSpacing
             collectionViewContentWidth = max(collectionViewContentWidth, xPos)
             xPos = 0
         }
-        collectionViewContentHeight = (yPosSet.values.max() ?? 0)
+        collectionViewContentHeight = yPos
     }
     
+    private func stickCellHeights() -> CGFloat {
+        var stickyCellHeights: CGFloat = 0
+        
+        let bottomStickyRowsSet = stickyConfig.getBottomStickyRows(rowCount: rows)
+        for section in bottomStickyRowsSet {
+            guard let itemsCount = collectionView?.numberOfItems(inSection: section), itemsCount > 0 else { continue }
+            let cellSpacing = (section == rows - 1) ? 0 : getSectionSpacing(forRow: section)
+            var maximumCellRowHeight: CGFloat = 0
+            for col in 0..<itemsCount {
+                let cellSize = getCellSize(forRow: section, forCol: col)
+                maximumCellRowHeight = max(maximumCellRowHeight, cellSize.height)
+            }
+            stickyCellHeights += maximumCellRowHeight + cellSpacing
+        }
+        return stickyCellHeights
+    }
+
     private func stickyCellsColHeights() -> [Int: CGFloat] {
         var stickyColHeights: [Int: CGFloat] = [:]
         

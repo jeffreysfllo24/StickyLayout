@@ -22,8 +22,8 @@ public class CalendarCell: UICollectionViewCell, Cell {
         super.init(frame: frame)
         label.clipsToBounds = true
         label.frame = self.bounds
+        label.textAlignment = .center
         self.contentView.addSubview(label)
-        self.layer.borderWidth = 1
     }
     
     required init?(coder: NSCoder) {

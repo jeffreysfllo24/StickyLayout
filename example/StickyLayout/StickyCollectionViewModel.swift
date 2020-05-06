@@ -32,19 +32,29 @@ protocol StickyCollectionViewModel {
 }
 
 public class CalendarViewModel: StickyCollectionViewModel {
-    var stickyConfig = StickyLayoutConfig()
-    var rowCount = 20
+    var stickyConfig = StickyLayoutConfig(stickyRowsFromTop: 1, stickyRowsFromBottom: 0, stickyColsFromLeft: 1, stickyColsFromRight: 0)
+    
+    let cellText = [
+        ["May 2020"],
+        ["", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"],
+        ["Week 1", "26", "27", "28", "29", "30", "1", "2"],
+        ["Week 2", "3", "4", "5", "6", "7", "8", "9"],
+        ["Week 3", "10", "11", "12", "13", "14", "15", "16"],
+        ["Week 4", "17", "18", "19", "20", "21", "22", "23"],
+        ["Week 5", "24", "25", "26", "27", "28", "29", "30"],
+        ["Week 6", "31", "", "", "", "", "", ""]
+    ]
+    
+    var rowCount: Int {
+        return cellText.count
+    }
     
     func colCount(forRow row: Int) -> Int {
-        if row == 0 {
-            return 1
-        } else {
-            return 5
-        }
+        cellText[row].count
     }
     
     func backgroundColor() -> UIColor {
-        return .brown
+        return UIColor(hex: "#E26D56ff")!
     }
     
     func interItemSpacing() -> CGFloat {
@@ -57,10 +67,11 @@ public class CalendarViewModel: StickyCollectionViewModel {
     
     func getCellSize(indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            return CGSize(width: 375, height: 50)
-
+            return CGSize(width: 375, height: 100)
+        } else if indexPath.item == 0 {
+            return CGSize(width: 80, height: 50)
         } else {
-            return CGSize(width: 100, height: 50)
+            return CGSize(width: 80, height: 50)
         }
     }
     
@@ -68,10 +79,22 @@ public class CalendarViewModel: StickyCollectionViewModel {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.reuseIdentifier, for: indexPath) as? CalendarCell else {
             return CalendarCell()
         }
-        cell.backgroundColor = UIColor(hex: "#f0f0edff")
-        cell.label.text = "\(indexPath.section)"
-        cell.layer.cornerRadius = 10
+        if indexPath.section == 0 {
+            cell.backgroundColor = UIColor(hex: "#555c64ff")
+        } else if indexPath.item == 0 {
+            cell.backgroundColor = UIColor(hex: "#EB7059ff")
+        } else {
+            cell.backgroundColor = UIColor(hex: "#fa775eff")
+        }
+        cell.label.textColor = .white
+        configureCell(cell: cell, indexPath: indexPath)
         return cell
+    }
+    
+    private func configureCell(cell: CalendarCell, indexPath: IndexPath) {
+        cell.label.text = cellText[indexPath.section][indexPath.item]
+        cell.label.alpha = (indexPath.section == 2 && indexPath.item < 5 && indexPath.item > 0) ? 0.5 : 1
+        cell.label.font = indexPath.section == 0 ? UIFont.boldSystemFont(ofSize: 20.0) : UIFont.systemFont(ofSize: 12)
     }
 }
 
