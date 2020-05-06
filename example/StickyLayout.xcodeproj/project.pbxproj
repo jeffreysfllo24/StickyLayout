@@ -37,7 +37,7 @@
 		F823BFA32461015A00874539 /* CalendarCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCells.swift; sourceTree = "<group>"; };
 		F82672B0245E5B630063D767 /* ExampleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleController.swift; sourceTree = "<group>"; };
 		F826943B246216ED00A2DF1A /* StickyCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyCollectionViewModel.swift; sourceTree = "<group>"; };
-		F87E46822458D35700F384CC /* StickyLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickyLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F87E46822458D35700F384CC /* StickyLayoutExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickyLayoutExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F87E46852458D35700F384CC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F87E46872458D35700F384CC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F87E46892458D35700F384CC /* ExamplesListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamplesListController.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		F87E46792458D35700F384CC = {
 			isa = PBXGroup;
 			children = (
-				F87E46842458D35700F384CC /* StickyLayout */,
+				F87E46842458D35700F384CC /* StickyLayoutExamples */,
 				F8F80A0C245A3E77000B6E61 /* StickyLayoutTests */,
 				F87E46832458D35700F384CC /* Products */,
 				4FD91049B91169BE9DB91158 /* Pods */,
@@ -108,13 +108,13 @@
 		F87E46832458D35700F384CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F87E46822458D35700F384CC /* StickyLayout.app */,
+				F87E46822458D35700F384CC /* StickyLayoutExamples.app */,
 				F8F80A0B245A3E77000B6E61 /* StickyLayoutTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F87E46842458D35700F384CC /* StickyLayout */ = {
+		F87E46842458D35700F384CC /* StickyLayoutExamples */ = {
 			isa = PBXGroup;
 			children = (
 				F843AB66245B3DB90006B011 /* Storyboards */,
@@ -128,7 +128,7 @@
 				F87E468E2458D35900F384CC /* Assets.xcassets */,
 				F87E46932458D35900F384CC /* Info.plist */,
 			);
-			path = StickyLayout;
+			path = StickyLayoutExamples;
 			sourceTree = "<group>";
 		};
 		F8F80A0C245A3E77000B6E61 /* StickyLayoutTests */ = {
@@ -143,9 +143,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F87E46812458D35700F384CC /* StickyLayout */ = {
+		F87E46812458D35700F384CC /* StickyLayoutExamples */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F87E46962458D35900F384CC /* Build configuration list for PBXNativeTarget "StickyLayout" */;
+			buildConfigurationList = F87E46962458D35900F384CC /* Build configuration list for PBXNativeTarget "StickyLayoutExamples" */;
 			buildPhases = (
 				4360C416795FEA5DD9FC4966 /* [CP] Check Pods Manifest.lock */,
 				F87E467E2458D35700F384CC /* Sources */,
@@ -157,9 +157,9 @@
 			);
 			dependencies = (
 			);
-			name = StickyLayout;
+			name = StickyLayoutExamples;
 			productName = StickyLayout;
-			productReference = F87E46822458D35700F384CC /* StickyLayout.app */;
+			productReference = F87E46822458D35700F384CC /* StickyLayoutExamples.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F8F80A0A245A3E77000B6E61 /* StickyLayoutTests */ = {
@@ -212,7 +212,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F87E46812458D35700F384CC /* StickyLayout */,
+				F87E46812458D35700F384CC /* StickyLayoutExamples */,
 				F8F80A0A245A3E77000B6E61 /* StickyLayoutTests */,
 			);
 		};
@@ -307,7 +307,7 @@
 /* Begin PBXTargetDependency section */
 		F8F80A11245A3E77000B6E61 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F87E46812458D35700F384CC /* StickyLayout */;
+			target = F87E46812458D35700F384CC /* StickyLayoutExamples */;
 			targetProxy = F8F80A10245A3E77000B6E61 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -445,7 +445,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R6BGCQQ764;
-				INFOPLIST_FILE = StickyLayout/Info.plist;
+				INFOPLIST_FILE = StickyLayoutExamples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -465,7 +465,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R6BGCQQ764;
-				INFOPLIST_FILE = StickyLayout/Info.plist;
+				INFOPLIST_FILE = StickyLayoutExamples/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -530,7 +530,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F87E46962458D35900F384CC /* Build configuration list for PBXNativeTarget "StickyLayout" */ = {
+		F87E46962458D35900F384CC /* Build configuration list for PBXNativeTarget "StickyLayoutExamples" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F87E46972458D35900F384CC /* Debug */,
