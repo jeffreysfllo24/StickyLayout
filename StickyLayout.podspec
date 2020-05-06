@@ -12,7 +12,8 @@ Pod::Spec.new do |s|
   s.author           = { 'Jeffrey Zhang' => 'jeffreysfllo24@gmail.com' }
   s.source           = { :git => 'https://github.com/jeffreysfllo24/StickyLayout.git', :tag => s.version.to_s }
 
-  s.source_files     = 'StickyLayout/Classes/**/*.swift'
+  s.ios.deployment_target = "8.0"
+  s.source_files     = 'StickyLayout/StickyLayout/*.{h,m,swift}'
 
   s.swift_version    = "5.0"
 end

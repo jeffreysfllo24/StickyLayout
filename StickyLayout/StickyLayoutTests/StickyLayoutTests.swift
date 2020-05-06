@@ -2,7 +2,7 @@
 //  StickyLayoutTests.swift
 //  StickyLayoutTests
 //
-//  Created by Jeffrey Zhang on 2020-04-29.
+//  Created by Jeffrey Zhang on 2020-05-06.
 //  Copyright © 2020 Jeffrey Zhang. All rights reserved.
 //
 
@@ -22,7 +22,7 @@ class StickyLayoutTests: XCTestCase {
     }
 
     func testEmptyStickyConfigWithEmptyLayout() throws {
-        let emptyStickyConfig = StickyLayout.StickyLayoutConfig(stickyRowsFromTop: 0,
+        let emptyStickyConfig = StickyLayoutConfig(stickyRowsFromTop: 0,
                                                                 stickyRowsFromBottom: 0,
                                                                 stickyColsFromLeft: 0,
                                                                 stickyColsFromRight: 0)
@@ -37,7 +37,7 @@ class StickyLayoutTests: XCTestCase {
     }
 
     func testEmptyStickyConfigWithPopulatedLayout() throws {
-        let emptyStickyConfig = StickyLayout.StickyLayoutConfig(stickyRowsFromTop: 0,
+        let emptyStickyConfig = StickyLayoutConfig(stickyRowsFromTop: 0,
                                                                 stickyRowsFromBottom: 0,
                                                                 stickyColsFromLeft: 0,
                                                                 stickyColsFromRight: 0)
@@ -52,7 +52,7 @@ class StickyLayoutTests: XCTestCase {
     }
     
     func testDefaultStickyConfig() throws {
-        let defaultStickyConfig = StickyLayout.StickyLayoutConfig()
+        let defaultStickyConfig = StickyLayoutConfig()
         let defaultSet = Set<Int>([0])
 
         XCTAssertEqual(defaultStickyConfig.getBottomStickyRows(rowCount: 100), emptySet)
@@ -75,7 +75,7 @@ class StickyLayoutTests: XCTestCase {
     }
     
     func testDefaultStickyConfigEmptyLayout() throws {
-        let defaultStickyConfig = StickyLayout.StickyLayoutConfig()
+        let defaultStickyConfig = StickyLayoutConfig()
 
         XCTAssertEqual(defaultStickyConfig.getBottomStickyRows(rowCount: 0), emptySet)
         XCTAssertEqual(defaultStickyConfig.getTopStickyRows(rowCount: 0), emptySet)
@@ -88,7 +88,7 @@ class StickyLayoutTests: XCTestCase {
     }
 
     func testNormalStickyConfig() throws {
-        let defaultStickyConfig = StickyLayout.StickyLayoutConfig(stickyRowsFromTop: 1,
+        let defaultStickyConfig = StickyLayoutConfig(stickyRowsFromTop: 1,
                                                                   stickyRowsFromBottom: 2,
                                                                   stickyColsFromLeft: 1,
                                                                   stickyColsFromRight: 1)
@@ -103,7 +103,7 @@ class StickyLayoutTests: XCTestCase {
     }
 
     func testOverlappingStickyConfig() throws {
-        let stickyConfig = StickyLayout.StickyLayoutConfig(stickyRowsFromTop: 5,
+        let stickyConfig = StickyLayoutConfig(stickyRowsFromTop: 5,
                                                                 stickyRowsFromBottom: 3,
                                                                 stickyColsFromLeft: 2,
                                                                 stickyColsFromRight: 10)
@@ -119,7 +119,7 @@ class StickyLayoutTests: XCTestCase {
     }
     
     func testOverflowingStickyConfig() throws {
-        let stickyConfig = StickyLayout.StickyLayoutConfig(stickyRowsFromTop: 500,
+        let stickyConfig = StickyLayoutConfig(stickyRowsFromTop: 500,
                                                                 stickyRowsFromBottom: 300,
                                                                 stickyColsFromLeft: 200,
                                                                 stickyColsFromRight: 100)
@@ -140,3 +140,4 @@ class StickyLayoutTests: XCTestCase {
     }
 
 }
+

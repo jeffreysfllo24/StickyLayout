@@ -17,18 +17,7 @@
 		F87E468F2458D35900F384CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87E468E2458D35900F384CC /* Assets.xcassets */; };
 		F87E46922458D35900F384CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87E46902458D35900F384CC /* LaunchScreen.storyboard */; };
 		F8F80A04245A125B000B6E61 /* StickyLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F80A03245A125B000B6E61 /* StickyLayout.swift */; };
-		F8F80A0E245A3E77000B6E61 /* StickyLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F80A0D245A3E77000B6E61 /* StickyLayoutTests.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		F8F80A10245A3E77000B6E61 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F87E467A2458D35700F384CC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F87E46812458D35700F384CC;
-			remoteInfo = StickyLayout;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1BD09FC2AE2CAFAC75F265C9 /* Pods_StickyLayout.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StickyLayout.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -45,9 +34,6 @@
 		F87E46912458D35900F384CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F87E46932458D35900F384CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F8F80A03245A125B000B6E61 /* StickyLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyLayout.swift; sourceTree = "<group>"; };
-		F8F80A0B245A3E77000B6E61 /* StickyLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StickyLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F8F80A0D245A3E77000B6E61 /* StickyLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyLayoutTests.swift; sourceTree = "<group>"; };
-		F8F80A0F245A3E77000B6E61 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +42,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F33DF3F610543A1CE3764EB8 /* Pods_StickyLayout.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F8F80A08245A3E77000B6E61 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +77,6 @@
 			isa = PBXGroup;
 			children = (
 				F87E46842458D35700F384CC /* StickyLayoutExamples */,
-				F8F80A0C245A3E77000B6E61 /* StickyLayoutTests */,
 				F87E46832458D35700F384CC /* Products */,
 				4FD91049B91169BE9DB91158 /* Pods */,
 				A8C3E6337BCB2664EBAD2E0F /* Frameworks */,
@@ -109,7 +87,6 @@
 			isa = PBXGroup;
 			children = (
 				F87E46822458D35700F384CC /* StickyLayoutExamples.app */,
-				F8F80A0B245A3E77000B6E61 /* StickyLayoutTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,15 +106,6 @@
 				F87E46932458D35900F384CC /* Info.plist */,
 			);
 			path = StickyLayoutExamples;
-			sourceTree = "<group>";
-		};
-		F8F80A0C245A3E77000B6E61 /* StickyLayoutTests */ = {
-			isa = PBXGroup;
-			children = (
-				F8F80A0D245A3E77000B6E61 /* StickyLayoutTests.swift */,
-				F8F80A0F245A3E77000B6E61 /* Info.plist */,
-			);
-			path = StickyLayoutTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,24 +130,6 @@
 			productReference = F87E46822458D35700F384CC /* StickyLayoutExamples.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F8F80A0A245A3E77000B6E61 /* StickyLayoutTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F8F80A14245A3E77000B6E61 /* Build configuration list for PBXNativeTarget "StickyLayoutTests" */;
-			buildPhases = (
-				F8F80A07245A3E77000B6E61 /* Sources */,
-				F8F80A08245A3E77000B6E61 /* Frameworks */,
-				F8F80A09245A3E77000B6E61 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F8F80A11245A3E77000B6E61 /* PBXTargetDependency */,
-			);
-			name = StickyLayoutTests;
-			productName = StickyLayoutTests;
-			productReference = F8F80A0B245A3E77000B6E61 /* StickyLayoutTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -192,10 +142,6 @@
 				TargetAttributes = {
 					F87E46812458D35700F384CC = {
 						CreatedOnToolsVersion = 11.4.1;
-					};
-					F8F80A0A245A3E77000B6E61 = {
-						CreatedOnToolsVersion = 11.4.1;
-						TestTargetID = F87E46812458D35700F384CC;
 					};
 				};
 			};
@@ -213,7 +159,6 @@
 			projectRoot = "";
 			targets = (
 				F87E46812458D35700F384CC /* StickyLayoutExamples */,
-				F8F80A0A245A3E77000B6E61 /* StickyLayoutTests */,
 			);
 		};
 /* End PBXProject section */
@@ -225,13 +170,6 @@
 			files = (
 				F87E46922458D35900F384CC /* LaunchScreen.storyboard in Resources */,
 				F87E468F2458D35900F384CC /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F8F80A09245A3E77000B6E61 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,23 +232,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F8F80A07245A3E77000B6E61 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F8F80A0E245A3E77000B6E61 /* StickyLayoutTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		F8F80A11245A3E77000B6E61 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F87E46812458D35700F384CC /* StickyLayoutExamples */;
-			targetProxy = F8F80A10245A3E77000B6E61 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F87E46902458D35900F384CC /* LaunchScreen.storyboard */ = {
@@ -478,46 +400,6 @@
 			};
 			name = Release;
 		};
-		F8F80A12245A3E77000B6E61 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R6BGCQQ764;
-				INFOPLIST_FILE = StickyLayoutTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = kocrashstudios.StickyLayoutTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StickyLayout.app/StickyLayout";
-			};
-			name = Debug;
-		};
-		F8F80A13245A3E77000B6E61 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R6BGCQQ764;
-				INFOPLIST_FILE = StickyLayoutTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = kocrashstudios.StickyLayoutTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StickyLayout.app/StickyLayout";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -535,15 +417,6 @@
 			buildConfigurations = (
 				F87E46972458D35900F384CC /* Debug */,
 				F87E46982458D35900F384CC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F8F80A14245A3E77000B6E61 /* Build configuration list for PBXNativeTarget "StickyLayoutTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F8F80A12245A3E77000B6E61 /* Debug */,
-				F8F80A13245A3E77000B6E61 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
