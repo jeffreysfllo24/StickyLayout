@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import StickyLayout
 
 protocol StickyCollectionViewModel {
     //Sticky Configuration
