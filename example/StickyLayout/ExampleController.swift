@@ -12,11 +12,23 @@ import UIKit
 class ExampleStickyController: UIViewController {
     
     let stickyLayoutType: StickyLayoutTypes
-    let numberOfItems = 15
-    lazy var stickyLayout = StickyLayout(stickyConfig: StickyLayout.StickyLayoutConfig(stickyRowsFromTop: 2, stickyRowsFromBottom: 2, stickyColsFromLeft: 2, stickyColsFromRight: 2))
+    let numberOfItems = 5
+    lazy var stickyLayout = StickyLayout(stickyConfig: StickyLayoutConfig(stickyRowsFromTop: 1,
+                                                                          stickyRowsFromBottom: 0,
+                                                                          stickyColsFromLeft: 1,
+                                                                          stickyColsFromRight: 0))
+    let stickyCollectionViewModel: StickyCollectionViewModel
     
     init(stickLayoutType: StickyLayoutTypes) {
         stickyLayoutType = stickLayoutType
+        switch stickyLayoutType {
+        case .calendar:
+            self.stickyCollectionViewModel = CalendarViewModel()
+        case .tabular:
+            self.stickyCollectionViewModel = CalendarViewModel()
+        case .horizontal:
+            self.stickyCollectionViewModel = CalendarViewModel()
+        }
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -27,10 +39,14 @@ class ExampleStickyController: UIViewController {
         
         let collectionView = createCollectionView()
         view.addSubview(collectionView)
-        
-        collectionView.frame = CGRect(x: 0, y: navigationController?.navigationBar.frame.maxY ?? 0, width: 375, height: 600)
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationController?.navigationBar.frame.maxY ?? 0),
+            collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0)
+            ])
     }
-    
+        
     private func createCollectionView() -> UICollectionView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: stickyLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,20 +54,9 @@ class ExampleStickyController: UIViewController {
         collectionView.dataSource = self
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
-        collectionView.backgroundColor = backgroundColor()
+        collectionView.backgroundColor = stickyCollectionViewModel.backgroundColor()
         collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.reuseIdentifier)
         return collectionView
-    }
-    
-    private func backgroundColor() -> UIColor {
-        switch stickyLayoutType {
-        case .calendar:
-            return .blue
-        case .tabular:
-            return .brown
-        case .horizontal:
-            return .gray
-        }
     }
     
     required init?(coder: NSCoder) {
@@ -61,21 +66,15 @@ class ExampleStickyController: UIViewController {
 
 extension ExampleStickyController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberOfItems
+        return stickyCollectionViewModel.colCount(forRow: section)
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return stickyCollectionViewModel.rowCount
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.reuseIdentifier, for: indexPath) as? CalendarCell else {
-            return UICollectionViewCell()
-        }
-        cell.backgroundColor = .cyan
-        cell.label.text = "\(indexPath.item)"
-        cell.layer.cornerRadius = 10
-        return cell
+        return stickyCollectionViewModel.layoutCell(collectionView: collectionView, indexPath: indexPath)
     }
     
 }
@@ -83,6 +82,14 @@ extension ExampleStickyController: UICollectionViewDataSource {
 extension ExampleStickyController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 30, height: 30)
+        return stickyCollectionViewModel.getCellSize(indexPath: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return stickyCollectionViewModel.sectionSpacing()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return stickyCollectionViewModel.interItemSpacing()
     }
 }

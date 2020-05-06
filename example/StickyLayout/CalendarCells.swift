@@ -9,15 +9,21 @@
 import Foundation
 import UIKit
 
-public class CalendarCell: UICollectionViewCell {
-    lazy var label = UILabel()
+protocol Cell: UICollectionViewCell {
+    static var reuseIdentifier: String { get }
+}
+
+public class CalendarCell: UICollectionViewCell, Cell {
+    
     static let reuseIdentifier: String = "CalendarCell"
+    lazy var label = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         label.clipsToBounds = true
         label.frame = self.bounds
         self.contentView.addSubview(label)
+        self.layer.borderWidth = 1
     }
     
     required init?(coder: NSCoder) {

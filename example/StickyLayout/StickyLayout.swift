@@ -9,6 +9,56 @@
 import Foundation
 import UIKit
 
+// MARK: - Sticky Layout Configuration
+public struct StickyLayoutConfig {
+
+    private let stickyRowsFromTop: Int
+    private let stickyRowsFromBottom: Int
+    private let stickyColsFromLeft: Int
+    private let stickyColsFromRight: Int
+
+    public init(stickyRowsFromTop: Int = 1,
+                stickyRowsFromBottom: Int = 0,
+                stickyColsFromLeft: Int = 1,
+                stickyColsFromRight: Int = 0) {
+
+        self.stickyRowsFromTop = stickyRowsFromTop
+        self.stickyRowsFromBottom = stickyRowsFromBottom
+        self.stickyColsFromLeft = stickyColsFromLeft
+        self.stickyColsFromRight = stickyColsFromRight
+    }
+
+    public func getStickyRows(rowCount: Int) -> Set<Int> {
+        return getTopStickyRows(rowCount: rowCount).union(getBottomStickyRows(rowCount: rowCount))
+    }
+
+    public func getStickyCols(colCount: Int) -> Set<Int> {
+        return getLeftStickyCols(colCount: colCount).union(getRightStickyCols(colCount: colCount))
+    }
+
+    public func getLeftStickyCols(colCount: Int) -> Set<Int> {
+        return getStickySet(totalLength: colCount, startIndex: 0, stickyCount: stickyColsFromLeft)
+    }
+
+    public func getRightStickyCols(colCount: Int) -> Set<Int> {
+        return getStickySet(totalLength: colCount, startIndex: colCount - stickyColsFromRight, stickyCount: stickyColsFromRight)
+    }
+
+    public func getBottomStickyRows(rowCount: Int) -> Set<Int> {
+        return getStickySet(totalLength: rowCount, startIndex: rowCount - stickyRowsFromBottom, stickyCount: stickyRowsFromBottom)
+    }
+
+    public func getTopStickyRows(rowCount: Int) -> Set<Int> {
+        return getStickySet(totalLength: rowCount, startIndex: 0, stickyCount: stickyRowsFromTop)
+    }
+
+    private func getStickySet(totalLength: Int, startIndex: Int, stickyCount: Int) -> Set<Int> {
+        let stickySetCount = min(totalLength, stickyCount)
+        let startIndex = max(startIndex, 0)
+        return stickySetCount > 0 ? Set<Int>(startIndex...startIndex + stickySetCount - 1) : Set()
+    }
+}
+
 open class StickyLayout: UICollectionViewFlowLayout {
     
     private let stickyConfig: StickyLayoutConfig
@@ -16,6 +66,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
     private var cellFramesDict = [IndexPath: CGRect]()
     private var collectionViewContentWidth: CGFloat = 0
     private var collectionViewContentHeight: CGFloat = 0
+    private var newBounds: CGRect = .zero
     
     override public var collectionViewContentSize: CGSize {
         return CGSize(width: collectionViewContentWidth, height: collectionViewContentHeight)
@@ -47,7 +98,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
     
     private func layoutCellPositions() {
         
-        guard let collectionView = collectionView, rows > 0, cellAttrsDict.isEmpty else {
+        guard let collectionView = collectionView, rows > 0, (cellAttrsDict.isEmpty || !newBounds.size.equalTo(collectionView.bounds.size)) else {
             return
         }
 
@@ -66,7 +117,8 @@ open class StickyLayout: UICollectionViewFlowLayout {
         for section in 0..<rows {
             let itemsCount = collectionView.numberOfItems(inSection: section)
             let rightStickyColsSets = stickyConfig.getRightStickyCols(colCount: itemsCount)
-            let cellSpacing = getCellSpacing(forRow: section)
+            let sectionSpacing = (section == rows - 1) ? 0 : getSectionSpacing(forRow: section)
+            let interItemSpacing = getInterItemSpacing(forRow: section)
 
             for item in 0..<itemsCount {
                 let cellSize = getCellSize(forRow: section, forCol: item)
@@ -74,7 +126,8 @@ open class StickyLayout: UICollectionViewFlowLayout {
                 let cellHeight = cellSize.height
                 let cellIndex = IndexPath(item: item, section: section)
                 let cellAttributes = UICollectionViewLayoutAttributes(forCellWith: cellIndex as IndexPath)
-
+                let interItemSpacing = (item == itemsCount - 1) ? 0 : interItemSpacing
+                
                 let yPos: CGFloat = yPosSet[item] ?? 0
                 var stickyRowYPos = yPos
                 if bottomStickyRowsSets.contains(section) {
@@ -86,7 +139,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
                     if yPos < stickyRowYPos {
                         stickyRowYPos = yPos
                     }
-                    stickyColHeights[item] = (stickyColHeights[item] ?? 0) - cellHeight - cellSpacing
+                    stickyColHeights[item] = (stickyColHeights[item] ?? 0) - cellHeight - sectionSpacing
                 }
                 
                 var stickyRowXPos = xPos
@@ -99,19 +152,19 @@ open class StickyLayout: UICollectionViewFlowLayout {
                     if xPos < stickyRowXPos {
                         stickyRowXPos = xPos
                     }
-                    stickyRowWidths[section] = (stickyRowWidths[section] ?? 0) - cellWidth - cellSpacing
+                    stickyRowWidths[section] = (stickyRowWidths[section] ?? 0) - cellWidth - interItemSpacing
                 }
                 
                 cellFramesDict[cellIndex] = CGRect(x: stickyRowXPos, y: stickyRowYPos, width: cellWidth, height: cellHeight)
                 cellAttributes.frame = cellFramesDict[cellIndex] ?? .zero
                 cellAttrsDict[cellIndex] = cellAttributes
-                xPos += cellWidth + cellSpacing
-                yPosSet[item] = (yPosSet[item] ?? 0) + cellHeight + cellSpacing
+                xPos += cellWidth + interItemSpacing
+                yPosSet[item] = (yPosSet[item] ?? 0) + cellHeight + sectionSpacing
             }
             collectionViewContentWidth = max(collectionViewContentWidth, xPos)
             xPos = 0
         }
-        collectionViewContentHeight = yPosSet.values.max() ?? 0
+        collectionViewContentHeight = (yPosSet.values.max() ?? 0)
     }
     
     private func stickyCellsColHeights() -> [Int: CGFloat] {
@@ -120,13 +173,10 @@ open class StickyLayout: UICollectionViewFlowLayout {
         let bottomStickyRowsSet = stickyConfig.getBottomStickyRows(rowCount: rows)
         for section in bottomStickyRowsSet {
             guard let itemsCount = collectionView?.numberOfItems(inSection: section), itemsCount > 0 else { continue }
-            let cellSpacing = getCellSpacing(forRow: section)
+            let cellSpacing = (section == rows - 1) ? 0 : getSectionSpacing(forRow: section)
 
             for col in 0..<itemsCount {
                 let cellSize = getCellSize(forRow: section, forCol: col)
-                
-                // TODO: May need to remove spacing for last row
-                // Efficiency by assuming all rows have the same height?
                 stickyColHeights[col] = (stickyColHeights[col] ?? 0) + cellSize.height + cellSpacing
             }
         }
@@ -139,10 +189,11 @@ open class StickyLayout: UICollectionViewFlowLayout {
         for section in 0..<rows {
             guard let itemsCount = collectionView?.numberOfItems(inSection: section), itemsCount > 0 else { continue }
             let stickyCols = stickyConfig.getRightStickyCols(colCount: itemsCount)
-            let cellSpacing = getCellSpacing(forRow: section)
+            let cellSpacing = getInterItemSpacing(forRow: section)
 
             for col in stickyCols {
                 let cellSize = getCellSize(forRow: section, forCol: col)
+                let cellSpacing = (col == itemsCount - 1) ? 0 : cellSpacing
                 stickyRowWidths[section] = (stickyRowWidths[section] ?? 0) + cellSize.width + cellSpacing
             }
         }
@@ -178,14 +229,17 @@ open class StickyLayout: UICollectionViewFlowLayout {
     }
 
     override public func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        self.newBounds = newBounds
         return true
     }
 
     override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        // Need to find a way to add sticky cell attributes anyway. Maybe separate into two separate cell dictionaries?
         var collectionViewAttributes: [UICollectionViewLayoutAttributes] = []
-        for (_, attribute) in cellAttrsDict {
-            if rect.intersects(attribute.frame) {
+        
+        for (index, attribute) in cellAttrsDict {
+            if stickyConfig.getRightStickyCols(colCount: colsCount(section: index.section)).contains(index.item) {
+                collectionViewAttributes.append(attribute)
+            } else if rect.intersects(attribute.frame) {
                 collectionViewAttributes.append(attribute)
             }
         }
@@ -205,7 +259,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
         return size
     }
     
-    private func getCellSpacing(forRow row: Int) -> CGFloat {
+    private func getSectionSpacing(forRow row: Int) -> CGFloat {
         guard let collectionView = collectionView,
             let delegate = collectionView.delegate as? UICollectionViewDelegateFlowLayout,
             let spacing = delegate.collectionView?(collectionView, layout: self, minimumLineSpacingForSectionAt: row) else {
@@ -213,60 +267,16 @@ open class StickyLayout: UICollectionViewFlowLayout {
         }
         return spacing
     }
-
-}
-
-// MARK: - Sticky Layout Configuration
-extension StickyLayout {
-
-    public struct StickyLayoutConfig {
-
-        private let stickyRowsFromTop: Int
-        private let stickyRowsFromBottom: Int
-        private let stickyColsFromLeft: Int
-        private let stickyColsFromRight: Int
-
-        public init(stickyRowsFromTop: Int = 1,
-                    stickyRowsFromBottom: Int = 0,
-                    stickyColsFromLeft: Int = 1,
-                    stickyColsFromRight: Int = 0) {
-
-            self.stickyRowsFromTop = stickyRowsFromTop
-            self.stickyRowsFromBottom = stickyRowsFromBottom
-            self.stickyColsFromLeft = stickyColsFromLeft
-            self.stickyColsFromRight = stickyColsFromRight
+    
+    private func getInterItemSpacing(forRow row: Int) -> CGFloat {
+        guard let collectionView = collectionView,
+            let delegate = collectionView.delegate as? UICollectionViewDelegateFlowLayout,
+            let spacing = delegate.collectionView?(collectionView, layout: self, minimumInteritemSpacingForSectionAt: row) else {
+                return self.minimumInteritemSpacing
         }
-
-        public func getStickyRows(rowCount: Int) -> Set<Int> {
-            return getTopStickyRows(rowCount: rowCount).union(getBottomStickyRows(rowCount: rowCount))
-        }
-
-        public func getStickyCols(colCount: Int) -> Set<Int> {
-            return getLeftStickyCols(colCount: colCount).union(getRightStickyCols(colCount: colCount))
-        }
-
-        public func getLeftStickyCols(colCount: Int) -> Set<Int> {
-            return getStickySet(totalLength: colCount, startIndex: 0, stickyCount: stickyColsFromLeft)
-        }
-
-        public func getRightStickyCols(colCount: Int) -> Set<Int> {
-            return getStickySet(totalLength: colCount, startIndex: colCount - stickyColsFromRight, stickyCount: stickyColsFromRight)
-        }
-
-        public func getBottomStickyRows(rowCount: Int) -> Set<Int> {
-            return getStickySet(totalLength: rowCount, startIndex: rowCount - stickyRowsFromBottom, stickyCount: stickyRowsFromBottom)
-        }
-
-        public func getTopStickyRows(rowCount: Int) -> Set<Int> {
-            return getStickySet(totalLength: rowCount, startIndex: 0, stickyCount: stickyRowsFromTop)
-        }
-
-        private func getStickySet(totalLength: Int, startIndex: Int, stickyCount: Int) -> Set<Int> {
-            let stickySetCount = min(totalLength, stickyCount)
-            let startIndex = max(startIndex, 0)
-            return stickySetCount > 0 ? Set<Int>(startIndex...startIndex + stickySetCount - 1) : Set()
-        }
+        return spacing
     }
+
 }
 
 // MARK: - ZOrdering
