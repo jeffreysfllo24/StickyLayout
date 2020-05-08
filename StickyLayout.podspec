@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'StickyLayout'
   s.version          = '0.0.1'
-  s.summary          = 'Stick it.'
+  s.summary          = 'Stick to it.'
 
   s.description      = <<-DESC
     StickyLayout is a collection view layout that makes top/bottom rows and left/right columns fixed while the rest of the cells are scrollable.

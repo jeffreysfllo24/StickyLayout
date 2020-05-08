@@ -16,6 +16,9 @@
 		F87E468A2458D35700F384CC /* ExamplesListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87E46892458D35700F384CC /* ExamplesListController.swift */; };
 		F87E468F2458D35900F384CC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F87E468E2458D35900F384CC /* Assets.xcassets */; };
 		F87E46922458D35900F384CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F87E46902458D35900F384CC /* LaunchScreen.storyboard */; };
+		F8DD4E0A246493500082DD7D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DD4E09246493500082DD7D /* UIColor+Extension.swift */; };
+		F8DD4E0D246493CF0082DD7D /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DD4E0C246493CF0082DD7D /* CalendarViewModel.swift */; };
+		F8DD4E0F246495AE0082DD7D /* MobileExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DD4E0E246495AE0082DD7D /* MobileExpenseViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		F87E468E2458D35900F384CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F87E46912458D35900F384CC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F87E46932458D35900F384CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8DD4E09246493500082DD7D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		F8DD4E0C246493CF0082DD7D /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		F8DD4E0E246495AE0082DD7D /* MobileExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileExpenseViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,12 +107,31 @@
 				F87E46872458D35700F384CC /* SceneDelegate.swift */,
 				F87E46892458D35700F384CC /* ExamplesListController.swift */,
 				F82672B0245E5B630063D767 /* ExampleController.swift */,
-				F826943B246216ED00A2DF1A /* StickyCollectionViewModel.swift */,
+				F8DD4E0B246493750082DD7D /* ViewModels */,
 				F823BFA32461015A00874539 /* CalendarCells.swift */,
+				F8DD4E08246492D60082DD7D /* Extensions */,
 				F87E468E2458D35900F384CC /* Assets.xcassets */,
 				F87E46932458D35900F384CC /* Info.plist */,
 			);
 			path = StickyLayoutExamples;
+			sourceTree = "<group>";
+		};
+		F8DD4E08246492D60082DD7D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F8DD4E09246493500082DD7D /* UIColor+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F8DD4E0B246493750082DD7D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F826943B246216ED00A2DF1A /* StickyCollectionViewModel.swift */,
+				F8DD4E0C246493CF0082DD7D /* CalendarViewModel.swift */,
+				F8DD4E0E246495AE0082DD7D /* MobileExpenseViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,8 +266,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8DD4E0D246493CF0082DD7D /* CalendarViewModel.swift in Sources */,
+				F8DD4E0A246493500082DD7D /* UIColor+Extension.swift in Sources */,
 				F826943C246216ED00A2DF1A /* StickyCollectionViewModel.swift in Sources */,
 				F87E468A2458D35700F384CC /* ExamplesListController.swift in Sources */,
+				F8DD4E0F246495AE0082DD7D /* MobileExpenseViewModel.swift in Sources */,
 				F87E46862458D35700F384CC /* AppDelegate.swift in Sources */,
 				F82672B1245E5B630063D767 /* ExampleController.swift in Sources */,
 				F87E46882458D35700F384CC /* SceneDelegate.swift in Sources */,

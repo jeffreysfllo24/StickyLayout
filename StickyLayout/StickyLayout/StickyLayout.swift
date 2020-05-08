@@ -83,7 +83,6 @@ open class StickyLayout: UICollectionViewFlowLayout {
     public init(stickyConfig: StickyLayoutConfig = StickyLayoutConfig()) {
         self.stickyConfig = stickyConfig
         super.init()
-        self.scrollDirection = .horizontal
     }
 
     public required init?(coder: NSCoder) {
@@ -186,22 +185,6 @@ open class StickyLayout: UICollectionViewFlowLayout {
             stickyCellHeights += maximumCellRowHeight + cellSpacing
         }
         return stickyCellHeights
-    }
-
-    private func stickyCellsColHeights() -> [Int: CGFloat] {
-        var stickyColHeights: [Int: CGFloat] = [:]
-        
-        let bottomStickyRowsSet = stickyConfig.getBottomStickyRows(rowCount: rows)
-        for section in bottomStickyRowsSet {
-            guard let itemsCount = collectionView?.numberOfItems(inSection: section), itemsCount > 0 else { continue }
-            let cellSpacing = (section == rows - 1) ? 0 : getSectionSpacing(forRow: section)
-
-            for col in 0..<itemsCount {
-                let cellSize = getCellSize(forRow: section, forCol: col)
-                stickyColHeights[col] = (stickyColHeights[col] ?? 0) + cellSize.height + cellSpacing
-            }
-        }
-        return stickyColHeights
     }
     
     private func stickyCellsRowWidths() -> [Int: CGFloat] {

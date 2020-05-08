@@ -22,7 +22,7 @@ class ExampleStickyController: UIViewController {
         case .calendar:
             self.stickyCollectionViewModel = CalendarViewModel()
         case .tabular:
-            self.stickyCollectionViewModel = CalendarViewModel()
+            self.stickyCollectionViewModel = MobileExpenseViewModel()
         case .horizontal:
             self.stickyCollectionViewModel = CalendarViewModel()
         }
@@ -36,10 +36,19 @@ class ExampleStickyController: UIViewController {
         
         let collectionView = createCollectionView()
         view.addSubview(collectionView)
+        
+        var topSafeAreaHeight: CGFloat = 0
+        var bottomSafeAreaHeight: CGFloat = 0
+        if #available(iOS 11.0, *) {
+          let window = UIApplication.shared.windows[0]
+          let safeFrame = window.safeAreaLayoutGuide.layoutFrame
+          topSafeAreaHeight = safeFrame.minY
+          bottomSafeAreaHeight = window.frame.maxY - safeFrame.maxY
+        }
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationController?.navigationBar.frame.maxY ?? 0),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationController?.navigationBar.frame.maxY ?? topSafeAreaHeight),
             collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -bottomSafeAreaHeight),
             collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0)
             ])
     }
