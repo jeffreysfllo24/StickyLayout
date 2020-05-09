@@ -10,4 +10,5 @@ script:
   - set -o pipefail && xcodebuild test -enableCodeCoverage YES -project StickyLayout/StickyLayout.xcodeproj -scheme StickyLayout -sdk $TEST_SDK -destination "platform=iOS Simulator,OS=$OS,name=$NAME" ONLY_ACTIVE_ARCH=YES
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) -t fdbc774e-383e-4cf9-b96a-1c6dc8988ae5 
+  - slather
+  - bash <(curl -s https://codecov.io/bash) -f path/to/xml_report/cobertura.xml -X coveragepy -X gcov -X xcode
