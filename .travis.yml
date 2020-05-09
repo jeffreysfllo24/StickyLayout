@@ -3,8 +3,8 @@ language: objective-c
 osx_image: xcode10.3
 env:
   matrix:
-    - TEST_SDK=iphonesimulator12.1 OS=12.1 NAME='iPhone XR'
-    - TEST_SDK=iphonesimulator12.1 OS=12.1 NAME='iPhone 7'
+    - TEST_SDK=iphonesimulator12.4 OS=12.4 NAME='iPhone XR'
+    - TEST_SDK=iphonesimulator12.4 OS=12.4 NAME='iPhone 7'
 
 script:
   - set -o pipefail && xcodebuild test -enableCodeCoverage YES -project StickyLayout/StickyLayout.xcodeproj -scheme StickyLayout -sdk $TEST_SDK -destination "platform=iOS Simulator,OS=$OS,name=$NAME" ONLY_ACTIVE_ARCH=YES
