@@ -68,7 +68,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
     private var collectionViewContentHeight: CGFloat = 0
     private var newBounds: CGRect = .zero
     
-    override public var collectionViewContentSize: CGSize {
+    override open var collectionViewContentSize: CGSize {
         return CGSize(width: collectionViewContentWidth, height: collectionViewContentHeight)
     }
 
