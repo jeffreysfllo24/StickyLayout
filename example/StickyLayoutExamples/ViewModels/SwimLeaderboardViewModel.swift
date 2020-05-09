@@ -70,25 +70,18 @@ public class SwimLeaderboardViewModel: StickyCollectionViewModel {
     func getCellSize(indexPath: IndexPath) -> CGSize {
         return CGSize(width: 70, height: 50)
     }
-    
-    func layoutCell(collectionView: UICollectionView, indexPath: IndexPath) -> Cell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.reuseIdentifier, for: indexPath) as? LabelCell else {
-            return LabelCell()
-        }
-        return cell
-    }
-    
+
     func setCellStyle(collectionView: UICollectionView, indexPath: IndexPath, cell: UICollectionViewCell) {
         guard let cell = cell as? LabelCell else {
             return
         }
         let isFirstRow = indexPath.section == 0
         let isLastCol = indexPath.item == colCount(forRow: indexPath.section) - 1
-        let isFirstCol = indexPath.section == 0
+        let isFirstCol = indexPath.item == 0
         
         cell.label.frame = cell.bounds
         cell.label.text = cellText[indexPath.section][indexPath.item]
-        cell.backgroundColor = (isFirstCol || isLastCol) ? UIColor(hex: "#61D0EAff") : UIColor(hex: "#5BC6DFff")
+        cell.backgroundColor = (isFirstCol || isLastCol || isFirstRow) ? UIColor(hex: "#61D0EAff") : UIColor(hex: "#5BC6DFff")
         cell.label.textColor = .white
         cell.label.alpha = (isFirstRow || isFirstCol || isLastCol)  ? 1 : 0.7
         cell.label.font = (isFirstRow || isFirstCol || isLastCol) ? UIFont.boldSystemFont(ofSize: 12) : UIFont.systemFont(ofSize: 12)

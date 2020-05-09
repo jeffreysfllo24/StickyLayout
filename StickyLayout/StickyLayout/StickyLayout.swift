@@ -232,14 +232,13 @@ open class StickyLayout: UICollectionViewFlowLayout {
          }
     }
 
-    override public func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+    open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         self.newBounds = newBounds
         return true
     }
 
-    override open func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    open override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var collectionViewAttributes: [UICollectionViewLayoutAttributes] = []
-        
         for (index, attribute) in cellAttrsDict {
             if stickyConfig.getRightStickyCols(colCount: colsCount(section: index.section)).contains(index.item) {
                 collectionViewAttributes.append(attribute)
@@ -250,7 +249,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
         return collectionViewAttributes
     }
 
-    override open func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+    open override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return cellAttrsDict[indexPath]
     }
     
