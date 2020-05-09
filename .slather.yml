@@ -1,5 +1,5 @@
 coverage_service: cobertura_xml
-xcodeproj: StickyLayout/StickyLayout.xcodeproj
+xcodeproj: StickyLayout.xcodeproj
 scheme: StickyLayout
 output_directory: reports
 ignore:
