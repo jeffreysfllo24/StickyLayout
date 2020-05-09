@@ -13,9 +13,9 @@ protocol Cell: UICollectionViewCell {
     static var reuseIdentifier: String { get }
 }
 
-public class CalendarCell: UICollectionViewCell, Cell {
+public class LabelCell: UICollectionViewCell, Cell {
     
-    static let reuseIdentifier: String = "CalendarCell"
+    static let reuseIdentifier: String = "LabelCell"
     lazy var label = UILabel()
 
     override init(frame: CGRect) {

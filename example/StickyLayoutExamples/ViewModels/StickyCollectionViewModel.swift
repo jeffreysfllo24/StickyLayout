@@ -28,6 +28,5 @@ protocol StickyCollectionViewModel {
     func getCellSize(indexPath: IndexPath) -> CGSize
     
     // Cell
-    func layoutCell(collectionView: UICollectionView, indexPath: IndexPath) -> Cell
     func setCellStyle(collectionView: UICollectionView, indexPath: IndexPath, cell: UICollectionViewCell)
 }

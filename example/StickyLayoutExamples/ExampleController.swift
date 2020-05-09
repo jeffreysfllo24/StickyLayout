@@ -24,7 +24,7 @@ class ExampleStickyController: UIViewController {
         case .tabular:
             self.stickyCollectionViewModel = MobileExpenseViewModel()
         case .horizontal:
-            self.stickyCollectionViewModel = CalendarViewModel()
+            self.stickyCollectionViewModel = SwimLeaderboardViewModel()
         }
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,7 +46,8 @@ class ExampleStickyController: UIViewController {
           bottomSafeAreaHeight = window.frame.maxY - safeFrame.maxY
         }
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: navigationController?.navigationBar.frame.maxY ?? topSafeAreaHeight),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant:
+                navigationController?.navigationBar.frame.maxY ?? topSafeAreaHeight),
             collectionView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -bottomSafeAreaHeight),
             collectionView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0)
@@ -62,7 +63,7 @@ class ExampleStickyController: UIViewController {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.backgroundColor = stickyCollectionViewModel.backgroundColor()
-        collectionView.register(CalendarCell.self, forCellWithReuseIdentifier: CalendarCell.reuseIdentifier)
+        collectionView.register(LabelCell.self, forCellWithReuseIdentifier: LabelCell.reuseIdentifier)
         return collectionView
     }
     
@@ -81,7 +82,7 @@ extension ExampleStickyController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.reuseIdentifier, for: indexPath)
+        return collectionView.dequeueReusableCell(withReuseIdentifier: LabelCell.reuseIdentifier, for: indexPath)
 //        return stickyCollectionViewModel.layoutCell(collectionView: collectionView, indexPath: indexPath)
     }
     
@@ -96,11 +97,15 @@ extension ExampleStickyController: UICollectionViewDelegateFlowLayout {
         return stickyCollectionViewModel.getCellSize(indexPath: indexPath)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return stickyCollectionViewModel.sectionSpacing()
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return stickyCollectionViewModel.interItemSpacing()
     }
 }

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3EDF56DBF7ABFF03EBF88BD9 /* Pods_StickyLayoutExamples.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5A9AE54DF969C1635A6F9E /* Pods_StickyLayoutExamples.framework */; };
-		F823BFA42461015A00874539 /* CalendarCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = F823BFA32461015A00874539 /* CalendarCells.swift */; };
+		F823BFA42461015A00874539 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F823BFA32461015A00874539 /* LabelCell.swift */; };
 		F82672B1245E5B630063D767 /* ExampleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F82672B0245E5B630063D767 /* ExampleController.swift */; };
 		F826943C246216ED00A2DF1A /* StickyCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F826943B246216ED00A2DF1A /* StickyCollectionViewModel.swift */; };
 		F87E46862458D35700F384CC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87E46852458D35700F384CC /* AppDelegate.swift */; };
@@ -28,7 +28,7 @@
 		713AB013868A1C5181E3125E /* Pods-StickyLayoutExamples.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickyLayoutExamples.release.xcconfig"; path = "Target Support Files/Pods-StickyLayoutExamples/Pods-StickyLayoutExamples.release.xcconfig"; sourceTree = "<group>"; };
 		7A5A9AE54DF969C1635A6F9E /* Pods_StickyLayoutExamples.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StickyLayoutExamples.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88551C9E7531243CB504C60D /* Pods-StickyLayout.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StickyLayout.release.xcconfig"; path = "Target Support Files/Pods-StickyLayout/Pods-StickyLayout.release.xcconfig"; sourceTree = "<group>"; };
-		F823BFA32461015A00874539 /* CalendarCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCells.swift; sourceTree = "<group>"; };
+		F823BFA32461015A00874539 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		F82672B0245E5B630063D767 /* ExampleController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleController.swift; sourceTree = "<group>"; };
 		F826943B246216ED00A2DF1A /* StickyCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickyCollectionViewModel.swift; sourceTree = "<group>"; };
 		F87E46822458D35700F384CC /* StickyLayoutExamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickyLayoutExamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,7 +110,7 @@
 				F87E46892458D35700F384CC /* ExamplesListController.swift */,
 				F82672B0245E5B630063D767 /* ExampleController.swift */,
 				F8DD4E0B246493750082DD7D /* ViewModels */,
-				F823BFA32461015A00874539 /* CalendarCells.swift */,
+				F823BFA32461015A00874539 /* LabelCell.swift */,
 				F8DD4E08246492D60082DD7D /* Extensions */,
 				F87E468E2458D35900F384CC /* Assets.xcassets */,
 				F87E46932458D35900F384CC /* Info.plist */,
@@ -278,7 +278,7 @@
 				F82672B1245E5B630063D767 /* ExampleController.swift in Sources */,
 				F87E46882458D35700F384CC /* SceneDelegate.swift in Sources */,
 				F8DD4E112465EC0A0082DD7D /* SwimLeaderboardViewModel.swift in Sources */,
-				F823BFA42461015A00874539 /* CalendarCells.swift in Sources */,
+				F823BFA42461015A00874539 /* LabelCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

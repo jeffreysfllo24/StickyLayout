@@ -1,8 +1,8 @@
 excluded:
  - Carthage
  - Pods
- - StickyLayout/SceneDelegate.swift
- - StickyLayout/AppDelegate.swift
+ - StickyLayoutExamples/SceneDelegate.swift
+ - StickyLayoutExamples/AppDelegate.swift
 disabled_rules:
   - todo
   - trailing_whitespace

@@ -32,7 +32,7 @@ class ExamplesListController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        title = "Examples Title"
+        title = "Sticky Layout Examples"
         self.view.backgroundColor = .white
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
