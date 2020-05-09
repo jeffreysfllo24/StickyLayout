@@ -29,4 +29,5 @@ protocol StickyCollectionViewModel {
     
     // Cell
     func layoutCell(collectionView: UICollectionView, indexPath: IndexPath) -> Cell
+    func setCellStyle(collectionView: UICollectionView, indexPath: IndexPath, cell: UICollectionViewCell)
 }

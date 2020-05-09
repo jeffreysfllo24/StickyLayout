@@ -20,8 +20,6 @@ public class CalendarCell: UICollectionViewCell, Cell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        label.clipsToBounds = true
-        label.frame = self.bounds
         label.textAlignment = .center
         self.contentView.addSubview(label)
     }

@@ -19,6 +19,7 @@
 		F8DD4E0A246493500082DD7D /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DD4E09246493500082DD7D /* UIColor+Extension.swift */; };
 		F8DD4E0D246493CF0082DD7D /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DD4E0C246493CF0082DD7D /* CalendarViewModel.swift */; };
 		F8DD4E0F246495AE0082DD7D /* MobileExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DD4E0E246495AE0082DD7D /* MobileExpenseViewModel.swift */; };
+		F8DD4E112465EC0A0082DD7D /* SwimLeaderboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DD4E102465EC0A0082DD7D /* SwimLeaderboardViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		F8DD4E09246493500082DD7D /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		F8DD4E0C246493CF0082DD7D /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
 		F8DD4E0E246495AE0082DD7D /* MobileExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MobileExpenseViewModel.swift; sourceTree = "<group>"; };
+		F8DD4E102465EC0A0082DD7D /* SwimLeaderboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwimLeaderboardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				F826943B246216ED00A2DF1A /* StickyCollectionViewModel.swift */,
 				F8DD4E0C246493CF0082DD7D /* CalendarViewModel.swift */,
 				F8DD4E0E246495AE0082DD7D /* MobileExpenseViewModel.swift */,
+				F8DD4E102465EC0A0082DD7D /* SwimLeaderboardViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				F87E46862458D35700F384CC /* AppDelegate.swift in Sources */,
 				F82672B1245E5B630063D767 /* ExampleController.swift in Sources */,
 				F87E46882458D35700F384CC /* SceneDelegate.swift in Sources */,
+				F8DD4E112465EC0A0082DD7D /* SwimLeaderboardViewModel.swift in Sources */,
 				F823BFA42461015A00874539 /* CalendarCells.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

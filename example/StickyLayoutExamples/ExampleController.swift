@@ -81,9 +81,13 @@ extension ExampleStickyController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return stickyCollectionViewModel.layoutCell(collectionView: collectionView, indexPath: indexPath)
+        return collectionView.dequeueReusableCell(withReuseIdentifier: CalendarCell.reuseIdentifier, for: indexPath)
+//        return stickyCollectionViewModel.layoutCell(collectionView: collectionView, indexPath: indexPath)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        stickyCollectionViewModel.setCellStyle(collectionView: collectionView, indexPath: indexPath, cell: cell)
+    }
 }
 
 extension ExampleStickyController: UICollectionViewDelegateFlowLayout {

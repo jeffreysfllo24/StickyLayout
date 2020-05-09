@@ -69,6 +69,22 @@ public class CalendarViewModel: StickyCollectionViewModel {
         return cell
     }
     
+    func setCellStyle(collectionView: UICollectionView, indexPath: IndexPath, cell: UICollectionViewCell) {
+        guard let cell = cell as? CalendarCell else {
+            return
+        }
+        if indexPath.section == 0 {
+            cell.backgroundColor = UIColor(hex: "#555c64ff")
+        } else if indexPath.item == 0 {
+            cell.backgroundColor = UIColor(hex: "#EB7059ff")
+        } else {
+            cell.backgroundColor = UIColor(hex: "#fa775eff")
+        }
+        cell.label.textColor = .white
+        configureCell(cell: cell, indexPath: indexPath)
+        cell.label.frame = cell.bounds
+    }
+    
     private func configureCell(cell: CalendarCell, indexPath: IndexPath) {
         cell.label.text = cellText[indexPath.section][indexPath.item]
         cell.label.alpha = (indexPath.section == 2 && indexPath.item < 5 && indexPath.item > 0) ? 0.5 : 1
