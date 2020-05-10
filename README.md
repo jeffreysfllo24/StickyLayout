@@ -1,6 +1,7 @@
 # StickyLayout
 
-[![Build Status](https://travis-ci.org/jeffreysfllo24/StickyLayout.svg?branch=master)](https://travis-ci.org/jeffreysfllo24/StickyLayout)
+<img https://travis-ci.org/jeffreysfllo24/StickyLayout.svg?branch=master >
+
 [![codecov](https://codecov.io/gh/jeffreysfllo24/StickyLayout/branch/master/graph/badge.svg)](https://codecov.io/gh/jeffreysfllo24/StickyLayout)
 
 ## What is StickyLayout?
