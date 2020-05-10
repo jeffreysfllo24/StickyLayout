@@ -1,6 +1,6 @@
 # StickyLayout
 
-<img https://travis-ci.org/jeffreysfllo24/StickyLayout.svg?branch=master >
+<img src="https://travis-ci.org/jeffreysfllo24/StickyLayout.svg?branch=master">
 
 [![codecov](https://codecov.io/gh/jeffreysfllo24/StickyLayout/branch/master/graph/badge.svg)](https://codecov.io/gh/jeffreysfllo24/StickyLayout)
 
