@@ -1,6 +1,7 @@
 coverage_service: cobertura_xml
 xcodeproj: StickyLayout.xcodeproj
 scheme: StickyLayout
+source_directory: StickyLayout
 output_directory: reports
 ignore:
   - StickyLayoutTests/*
