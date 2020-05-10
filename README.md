@@ -1,12 +1,12 @@
 # StickyLayout
 <p>
   <p float="left">
-    <img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_Calendar.gif" width="435" height="400" float="top">
-    <img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_swimming.gif" width="435" height="400" float="bottom">
+    <img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_Calendar.gif" float="top">
+    <img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_swimming.gif" float="bottom">
   </p>
 
   <p float="right">
-    <img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickLayout_Tabular.gif" width="435" float="right">
+    <img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickLayout_Tabular.gif" float="right">
   </p>
 </p>
 
