@@ -1,11 +1,9 @@
 # StickyLayout
 
-[![codecov](https://codecov.io/gh/jeffreysfllo24/StickyLayout/branch/master/graph/badge.svg)](https://codecov.io/gh/jeffreysfllo24/StickyLayout)
-
 <p float="center">
- 	<img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_Calendar.gif" >
-	<img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickLayout_Tabular.gif">
-	<img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_swimming.gif">
+ 	<img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_Calendar.gif" width="435">
+	<img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickLayout_Tabular.gif" width="435">
+	<img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_swimming.gif" width="435">
 </p>
 
 ## What is StickyLayout?
