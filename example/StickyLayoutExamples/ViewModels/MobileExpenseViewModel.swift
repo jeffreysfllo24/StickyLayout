@@ -46,7 +46,7 @@ public class MobileExpenseViewModel: StickyCollectionViewModel {
     private var cellText: [[String]] = []
     
     init() {
-        var cellText = [["", "Messages", "Minutes", "Data", "Long Distance"]]
+        var cellText = [["Names", "Messages", "Minutes", "Data", "Long Distance"]]
         for index in 0..<names.count {
             var individualExpense: [String] = []
             individualExpense.append(names[index])

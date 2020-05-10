@@ -1,8 +1,12 @@
 # StickyLayout
 
-<img src="https://travis-ci.org/jeffreysfllo24/StickyLayout.svg?branch=master">
-
 [![codecov](https://codecov.io/gh/jeffreysfllo24/StickyLayout/branch/master/graph/badge.svg)](https://codecov.io/gh/jeffreysfllo24/StickyLayout)
+
+<p float="center">
+ 	<img src="https://github.com/jeffreysfllo24/StickyLayout/branch/master/Art/StickyLayout_Calendar.gif" width="290">
+	<img src="https://github.com/jeffreysfllo24/StickyLayout/branch/master/Art/StickLayout_Tabular.gif" width="290">
+	<img src="https://github.com/jeffreysfllo24/StickyLayout/branch/master/Art/StickyLayout_swimming.gif" width="290">
+</p>
 
 ## What is StickyLayout?
 **StickyLayout** is a collection view layout that provides sticky row and column configurability.
