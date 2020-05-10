@@ -48,11 +48,11 @@ public class CalendarViewModel: StickyCollectionViewModel {
     
     func getCellSize(indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            return CGSize(width: 375, height: 100)
+            return CGSize(width: 375, height: 60)
         } else if indexPath.item == 0 {
-            return CGSize(width: 80, height: 50)
+            return CGSize(width: 80, height: 34.3)
         } else {
-            return CGSize(width: 70, height: 50)
+            return CGSize(width: 70, height: 34.3)
         }
     }
     
@@ -62,10 +62,14 @@ public class CalendarViewModel: StickyCollectionViewModel {
         }
         if indexPath.section == 0 {
             cell.backgroundColor = UIColor(hex: "#555c64ff")
-        } else if indexPath.item == 0 {
+            cell.label.font = UIFont.boldSystemFont(ofSize: 20.0)
+        } else if indexPath.item == 0 || indexPath.section == 1 {
             cell.backgroundColor = UIColor(hex: "#EB7059ff")
+            cell.label.font = UIFont.boldSystemFont(ofSize: 12.0)
         } else {
             cell.backgroundColor = UIColor(hex: "#fa775eff")
+            cell.label.font = UIFont.systemFont(ofSize: 12.0)
+
         }
         cell.label.textColor = .white
         configureCell(cell: cell, indexPath: indexPath)
@@ -74,7 +78,6 @@ public class CalendarViewModel: StickyCollectionViewModel {
     
     private func configureCell(cell: LabelCell, indexPath: IndexPath) {
         cell.label.text = cellText[indexPath.section][indexPath.item]
-        cell.label.alpha = (indexPath.section == 2 && indexPath.item < 5 && indexPath.item > 0) ? 0.5 : 1
-        cell.label.font = indexPath.section == 0 ? UIFont.boldSystemFont(ofSize: 20.0) : UIFont.systemFont(ofSize: 12)
+        cell.label.alpha = (indexPath.section == 2 && indexPath.item < 5 && indexPath.item > 0) ? 0.7 : 1
     }
 }
