@@ -1,8 +1,14 @@
 # StickyLayout
+<p>
+  <p float="left">
+    <img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_Calendar.gif" width="435" height="400" float="top">
+    <img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_swimming.gif" width="435" height="400" float="bottom">
+  </p>
 
-<img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_Calendar.gif" width="435" height="400" float="left">
-<img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickLayout_Tabular.gif" width="435" float="right">
-<img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickyLayout_swimming.gif" width="435" height="400" float="left">
+  <p float="right">
+    <img src="https://github.com/jeffreysfllo24/StickyLayout/blob/master/Art/StickLayout_Tabular.gif" width="435" float="right">
+  </p>
+</p>
 
 ## What is StickyLayout?
 **StickyLayout** is a collection view layout that provides sticky row and column configurability.
