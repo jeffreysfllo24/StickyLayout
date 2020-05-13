@@ -97,11 +97,13 @@ open class StickyLayout: UICollectionViewFlowLayout {
     
     private func layoutCellPositions() {
         
-        guard let collectionView = collectionView, rows > 0, (cellAttrsDict.isEmpty || !newBounds.size.equalTo(collectionView.bounds.size)) else {
+        guard let collectionView = collectionView, rows > 0 else {
             return
         }
-
         cellAttrsDict = [IndexPath: UICollectionViewLayoutAttributes]()
+        cellFramesDict = [IndexPath: CGRect]()
+        collectionViewContentWidth = 0
+        collectionViewContentHeight = 0
         
         // Set Containing current xPos and current yPos for each column
         var xPos: CGFloat = 0
