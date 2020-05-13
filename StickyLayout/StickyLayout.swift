@@ -66,12 +66,11 @@ open class StickyLayout: UICollectionViewFlowLayout {
     private var cellFramesDict = [IndexPath: CGRect]()
     private var collectionViewContentWidth: CGFloat = 0
     private var collectionViewContentHeight: CGFloat = 0
-    private var newBounds: CGRect = .zero
     
     override open var collectionViewContentSize: CGSize {
         return CGSize(width: collectionViewContentWidth, height: collectionViewContentHeight)
     }
-
+    
     private var rows: Int {
         return collectionView?.numberOfSections ?? 0
     }
@@ -112,7 +111,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
         let bottomStickyRowsSets = stickyConfig.getBottomStickyRows(rowCount: rows)
         
         // Retrieve height of right sticky columns and bottom sticky rows
-        var stickyColHeights = stickCellHeights()
+        var stickyColHeights = stickyCellHeights()
         var stickyRowWidths = stickyCellsRowWidths()
         
         for section in 0..<rows {
@@ -134,10 +133,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
                 var stickyRowYPos = yPos
                 if bottomStickyRowsSets.contains(section) {
                     stickyRowYPos = collectionView.frame.height - stickyColHeights
-                    
-                    // Check if the current Y position is smaller than where the stickyRow would be when aligned to
-                    // the bottom. If true, the tableview height is smaller than the container and we update the
-                    // stickyRow Y position with the current Y position.
+
                     if yPos < stickyRowYPos {
                         stickyRowYPos = yPos
                     }
@@ -146,10 +142,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
                 var stickyRowXPos = xPos
                 if rightStickyColsSets.contains(item) {
                     stickyRowXPos = collectionView.frame.width - (stickyRowWidths[section] ?? 0)
-                    
-                    // Check if the current X position is smaller than where the stickyCol would be when aligned to
-                    // the right. If true, the tableview width is smaller than the container and we update the stickyRow
-                    // X position with the current X position.
+                
                     if xPos < stickyRowXPos {
                         stickyRowXPos = xPos
                     }
@@ -172,7 +165,7 @@ open class StickyLayout: UICollectionViewFlowLayout {
         collectionViewContentHeight = yPos
     }
     
-    private func stickCellHeights() -> CGFloat {
+    private func stickyCellHeights() -> CGFloat {
         var stickyCellHeights: CGFloat = 0
         
         let bottomStickyRowsSet = stickyConfig.getBottomStickyRows(rowCount: rows)
@@ -235,7 +228,6 @@ open class StickyLayout: UICollectionViewFlowLayout {
     }
 
     open override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        self.newBounds = newBounds
         return true
     }
 
