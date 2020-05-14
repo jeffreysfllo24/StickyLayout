@@ -10,7 +10,7 @@
   </p>
 </p>
 
-##### The above displayed examples are accessible in the `example` folder.
+##### The above examples are accessible in the `example` folder.
 
 ## What is StickyLayout?
 **StickyLayout** is a collection view layout that provides sticky row and column configurability.
@@ -57,4 +57,4 @@ pod "StickyLayout"
 ## Feedback and Suggestions
 If you have any suggestions or improvements please open a pull request or create an issue.
 
-And if you found StickyLayout useful or want to show support feel free to star this repo! 
+And if you found StickyLayout useful or want to show support feel free to star this repo!
