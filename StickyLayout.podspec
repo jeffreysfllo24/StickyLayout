@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name             = 'StickyLayout'
-  s.version          = '0.0.1'
+  s.version          = '1.0.0'
   s.summary          = 'Stick to it.'
 
   s.description      = <<-DESC
-    StickyLayout is a collection view layout that makes top/bottom rows and left/right columns fixed while the rest of the cells are scrollable.
+    StickyLayout is a collection view layout that provides sticky row and columns configurability.
                        DESC
 
   s.homepage         = 'https://github.com/jeffreysfllo24/StickyLayout'
@@ -13,6 +13,8 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/jeffreysfllo24/StickyLayout.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = "8.0"
+  s.tvos.deployment_target = "9.0"
+
   s.source_files     = 'StickyLayout/*.{h,m,swift}'
 
   s.swift_version    = "5.0"
