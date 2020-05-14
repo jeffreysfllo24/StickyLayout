@@ -15,14 +15,14 @@ public class SwimLeaderboardViewModel: StickyCollectionViewModel {
                                           stickyColsFromLeft: 1,
                                           stickyColsFromRight: 1)
     
-    private let firstSplitIntervals = [55, 63, 44, 60, 50]
-    private let secondSplitIntervals = [58, 73, 70, 65, 52]
-    private let thirdSplitIntervals = [65, 53, 65, 66, 57]
-    private let fourthSplitIntervals = [68, 63, 80, 67, 60]
-    private let fifthSplitIntervals = [59, 63, 90, 60, 55]
-    private let sixthSplitIntervals = [60, 69, 63, 70, 62]
-    private let seventhSplitIntervals = [62, 53, 54, 51, 63]
-    private let eithSplitIntervals = [67, 55, 64, 59, 55]
+    private let splitIntervals = [[55, 63, 44, 60, 50],
+                                  [55, 63, 44, 60, 50],
+                                  [65, 53, 65, 66, 57],
+                                  [68, 63, 80, 67, 60],
+                                  [59, 63, 90, 60, 55],
+                                  [60, 69, 63, 70, 62],
+                                  [62, 53, 54, 51, 63],
+                                  [67, 55, 64, 59, 55]]
 
     private let swimmers = ["Phelps", "Lochte", "Henry", "John", "Larry"]
     
@@ -33,27 +33,14 @@ public class SwimLeaderboardViewModel: StickyCollectionViewModel {
         for index in 0..<swimmers.count {
             var individualTimes: [String] = []
             individualTimes.append(swimmers[index])
-            individualTimes.append(formatInterval(interval: firstSplitIntervals[index]))
-            individualTimes.append(formatInterval(interval: secondSplitIntervals[index]))
-            individualTimes.append(formatInterval(interval: thirdSplitIntervals[index]))
-            individualTimes.append(formatInterval(interval: fourthSplitIntervals[index]))
-            individualTimes.append(formatInterval(interval: fifthSplitIntervals[index]))
-            individualTimes.append(formatInterval(interval: sixthSplitIntervals[index]))
-            individualTimes.append(formatInterval(interval: seventhSplitIntervals[index]))
-            individualTimes.append(formatInterval(interval: eithSplitIntervals[index]))
-
-            let totalIntervals = firstSplitIntervals[index] +
-                                 secondSplitIntervals[index] +
-                                 thirdSplitIntervals[index] +
-                                 fourthSplitIntervals[index] +
-                                 fifthSplitIntervals[index] +
-                                 sixthSplitIntervals[index] +
-                                 seventhSplitIntervals[index] +
-                                 eithSplitIntervals[index]
-            individualTimes.append(formatInterval(interval: totalIntervals))
+            var totalTime = 0
+            for split in splitIntervals {
+                individualTimes.append(formatInterval(interval: split[index]))
+                totalTime += split[index]
+            }
+            individualTimes.append(formatInterval(interval: totalTime))
             cellText.append(individualTimes)
         }
-
         self.cellText = cellText
     }
 
@@ -99,7 +86,7 @@ public class SwimLeaderboardViewModel: StickyCollectionViewModel {
             cell.backgroundColor = UIColor(hex: "#5BC6DFff")
         }
         cell.label.textColor = .white
-        cell.label.alpha = (isFirstRow || isFirstCol || isLastCol)  ? 1 : 0.7
+        cell.label.alpha = (isFirstRow || isFirstCol || isLastCol) ? 1 : 0.7
         cell.label.font = (isFirstRow || isFirstCol || isLastCol) ? UIFont.boldSystemFont(ofSize: 12) : UIFont.systemFont(ofSize: 12)
     }
     
@@ -110,5 +97,4 @@ public class SwimLeaderboardViewModel: StickyCollectionViewModel {
         let formattedString = formatter.string(from: TimeInterval(interval))!
         return formattedString
     }
-    
 }

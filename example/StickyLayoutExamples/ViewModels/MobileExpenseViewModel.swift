@@ -18,7 +18,11 @@ public class MobileExpenseViewModel: StickyCollectionViewModel {
     private let messagesCosts = [20, 47, 30, 23, 34, 13, 15, 42, 53, 12, 43, 12, 34, 45, 65]
     private let minutesCosts = [5, 41, 40, 22, 74, 43, 15, 122, 23, 14, 0, 2, 0, 93, 11]
     private let dataCosts = [4, 0, 340, 23, 31, 13, 25, 32, 6, 33, 90, 22, 8, 0, 10]
-    private let longDistanceCosts = [14, 24, 43, 2, 21, 23, 54, 43, 54, 2, 0, 0, 4, 5, 2]
+    private let longDistanceCosts = [14, 24, 43, 2, 21, 23, 54, 43, 54, 2, 0, 0, 4, 5, 0]
+    
+    private var costLists: [[Int]] {
+        return [messagesCosts, minutesCosts, dataCosts, longDistanceCosts]
+    }
     
     private var messagesTotalCost: Int {
         return messagesCosts.reduce(0, +)
@@ -48,12 +52,10 @@ public class MobileExpenseViewModel: StickyCollectionViewModel {
     init() {
         var cellText = [["Names", "Messages", "Minutes", "Data", "Long Distance"]]
         for index in 0..<names.count {
-            var individualExpense: [String] = []
-            individualExpense.append(names[index])
-            individualExpense.append("$" + String(messagesCosts[index]))
-            individualExpense.append("$" + String(minutesCosts[index]))
-            individualExpense.append("$" + String(dataCosts[index]))
-            individualExpense.append("$" + String(longDistanceCosts[index]))
+            var individualExpense: [String] = [names[index]]
+            for costList in costLists {
+                individualExpense.append("$" + String(costList[index]))
+            }
             cellText.append(individualExpense)
         }
         
@@ -86,11 +88,11 @@ public class MobileExpenseViewModel: StickyCollectionViewModel {
     }
     
     func interItemSpacing() -> CGFloat {
-        0
+        return 0
     }
     
     func sectionSpacing() -> CGFloat {
-        0
+        return 0
     }
     
     func getCellSize(indexPath: IndexPath) -> CGSize {
@@ -120,14 +122,9 @@ public class MobileExpenseViewModel: StickyCollectionViewModel {
         } else if indexPath.section % 2 == 1 {
             cell.backgroundColor = UIColor(hex: "#eff0f2ff")
         }
-        configureCell(cell: cell, indexPath: indexPath)
-        cell.label.frame = cell.bounds
-    }
-    
-    private func configureCell(cell: LabelCell, indexPath: IndexPath) {
         cell.label.text = cellText[indexPath.section][indexPath.item]
         cell.label.alpha = (indexPath.section == 0 || indexPath.item == 0 || rowCount - indexPath.section <= 2) ? 1 : 0.5
         cell.label.font = (indexPath.section == 0 || indexPath.item == 0) ? UIFont.boldSystemFont(ofSize: 12) : UIFont.systemFont(ofSize: 12)
+        cell.label.frame = cell.bounds
     }
-    
 }

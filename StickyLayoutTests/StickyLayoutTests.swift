@@ -56,10 +56,10 @@ class StickyLayoutTests: XCTestCase {
         mockDataProvider = MockDataProvider()
         mockDataProvider.parent = self
         self.dataModel = [[0, 1, 2], [3, 4, 5], [6, 7]]
-        self.stickylayout = StickyLayout(stickyConfig: StickyLayoutConfig(stickyRowsFromTop: 10,
-                                                                          stickyRowsFromBottom: 10,
-                                                                          stickyColsFromLeft: 10,
-                                                                          stickyColsFromRight: 10))
+        self.stickylayout = StickyLayout(stickyConfig: StickyLayoutConfig(stickyRowsFromTop: 1,
+                                                                          stickyRowsFromBottom: 1,
+                                                                          stickyColsFromLeft: 1,
+                                                                          stickyColsFromRight: 1))
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: stickylayout)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
         collectionView.delegate = mockDataProvider
@@ -108,8 +108,8 @@ class StickyLayoutTests: XCTestCase {
     
     func testCollectionViewLayoutAttributes() {
         stickylayout.prepare()
-        let visibleCells = stickylayout.layoutAttributesForElements(in: collectionView.frame)
-        XCTAssertEqual(visibleCells?.count, 8)
+        let visibleCells = stickylayout.layoutAttributesForElements(in: CGRect(x: 0, y: 0, width: 375, height: 800))
+        XCTAssertEqual(visibleCells?.count, 7)
     }
 
     func testPerformanceExample() throws {

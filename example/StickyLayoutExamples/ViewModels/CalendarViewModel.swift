@@ -69,15 +69,10 @@ public class CalendarViewModel: StickyCollectionViewModel {
         } else {
             cell.backgroundColor = UIColor(hex: "#fa775eff")
             cell.label.font = UIFont.systemFont(ofSize: 12.0)
-
         }
         cell.label.textColor = .white
-        configureCell(cell: cell, indexPath: indexPath)
-        cell.label.frame = cell.bounds
-    }
-    
-    private func configureCell(cell: LabelCell, indexPath: IndexPath) {
         cell.label.text = cellText[indexPath.section][indexPath.item]
         cell.label.alpha = (indexPath.section == 2 && indexPath.item < 5 && indexPath.item > 0) ? 0.7 : 1
+        cell.label.frame = cell.bounds
     }
 }
