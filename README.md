@@ -1,5 +1,8 @@
-# StickyLayout  
-[![codecov](https://codecov.io/gh/jeffreysfllo24/StickyLayout/branch/master/graph/badge.svg)](https://codecov.io/gh/jeffreysfllo24/StickyLayout)[![pod](https://cocoapod-badges.herokuapp.com/v/StickyLayout/badge.png)](https://cocoapods.org/pods/StickyLayout)
+# StickyLayout 
+[![codecov](https://codecov.io/gh/jeffreysfllo24/StickyLayout/branch/master/graph/badge.svg)](https://codecov.io/gh/jeffreysfllo24/StickyLayout)
+[![pod](https://cocoapod-badges.herokuapp.com/v/StickyLayout/badge.png)](https://cocoapods.org/pods/StickyLayout)
+[![Badge w/ Platform](https://cocoapod-badges.herokuapp.com/p/StickyLayout/badge.svg)](https://cocoadocs.org/pods/StickyLayout)
+![License MIT](https://go-shields.herokuapp.com/license-MIT-blue.png)
 
 <p>
   <p float="left">
